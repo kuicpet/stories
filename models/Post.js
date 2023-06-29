@@ -2,21 +2,26 @@ import { Schema, model, models } from 'mongoose'
 
 const PostSchema = new Schema(
   {
-    userId: {
-      type: String,
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     title: {
       type: String,
       max: 20,
     },
-    description: {
+    content: {
       type: String,
       max: 500,
     },
     comments: {
       type: Array,
       default: [],
+    },
+    createdAt: {
+      type: Date,
+      default: new Date(),
     },
   },
   {

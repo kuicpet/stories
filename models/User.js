@@ -24,10 +24,10 @@ const UserSchema = new Schema(
       type: String,
       default: '',
     },
-    description: {
+    /*description: {
       type: String,
       max: 50,
-    },
+    },*/
     isAdmin: { type: Boolean, required: true, default: false },
   },
   { timestamps: true }
