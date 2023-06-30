@@ -33,6 +33,7 @@ export default async function register(req, res) {
       email: user.email,
       message: 'User registration succesful',
     })
+    await db.disconnect()
   } catch (error) {
     console.log(error)
     res.status(500).json({
