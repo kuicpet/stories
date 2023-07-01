@@ -15,17 +15,36 @@ const PostSchema = new Schema(
       type: String,
       max: 500,
     },
-    comments: {
-      type: Array,
-      default: [],
-    },
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    comments: [
+      {
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        },
+        content: {
+          type: String,
+          required: true,
+        },
+        createdAt: {
+          type: Date,
+          default: new Date(),
+        },
+      },
+    ],
     createdAt: {
       type: Date,
       default: new Date(),
     },
   },
   {
-    timestamps: trues,
+    timestamps: true,
+    collection: 'stories',
   }
 )
 

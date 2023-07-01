@@ -18,7 +18,7 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: true,
-      min: 6,
+      minLength: 6,
     },
     profileImage: {
       type: String,
@@ -30,7 +30,7 @@ const UserSchema = new Schema(
     },*/
     isAdmin: { type: Boolean, required: true, default: false },
   },
-  { timestamps: true }
+  { timestamps: true, collection: 'stories' }
 )
 
 const User = models.User || model('User', UserSchema)
