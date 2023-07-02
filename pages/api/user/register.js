@@ -35,10 +35,12 @@ export default async function register(req, res) {
     })
     await db.disconnect()
   } catch (error) {
-    console.log(error)
+    //console.log(error)
     res.status(500).json({
       success: false,
-      message: 'An error occurred registering the user',
+      message: error.message,
     })
+  } finally {
+    await db.disconnect()
   }
 }
