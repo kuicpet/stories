@@ -26,7 +26,7 @@ const UserSchema = new Schema(
     },*/
     isAdmin: { type: Boolean, required: true, default: false },
   },
-  { timestamps: true, collection: 'stories' }
+  { timestamps: true, collection: 'Users' }
 )
 
 const User = models.User || model('User', UserSchema)

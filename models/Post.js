@@ -44,7 +44,7 @@ const PostSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: 'stories',
+    collection: 'Posts',
   }
 )
 
