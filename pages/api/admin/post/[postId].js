@@ -8,6 +8,12 @@ const getPost = async (req, res) => {
 
     try {
       await db.connect()
+
+      // Check if the user is an admin
+      if (!isAuth(req) || !isAdmin(req)) {
+        return res.status(403).json({ success: false, error: 'Forbidden' })
+      }
+
       // Check if userId is a valid ObjectId
       if (!mongoose.Types.ObjectId.isValid(postId)) {
         return res.status(400).json({ message: 'Invalid post ID' })

@@ -24,7 +24,12 @@ const UserSchema = new Schema(
       type: String,
       max: 50,
     },*/
-    isAdmin: { type: Boolean, required: true, default: false },
+    // isAdmin: { type: Boolean, required: true, default: false },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
   },
   { timestamps: true, collection: 'Users' }
 )

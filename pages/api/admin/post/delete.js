@@ -1,11 +1,18 @@
 import Post from '../../../../models/Post'
 import db from '../../../../utils/db'
+import { isAdmin, isAuth } from '../../../../utils/auth'
 import mongoose from 'mongoose'
 
 export default async function deletePost(req, res) {
   if (req.method === 'DELETE') {
     try {
       await db.connect()
+      
+      // Check if the user is an admin
+      if (!isAuth(req) || !isAdmin(req)) {
+        return res.status(403).json({ success: false, error: 'Forbidden' })
+      }
+      
       const { postId } = req.query
 
       // Check if postId is a valid ObjectId

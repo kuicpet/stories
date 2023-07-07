@@ -1,10 +1,17 @@
 import db from '../../../../utils/db'
 import Post from '../../../../models/Post'
+import { isAdmin, isAuth } from '../../../../utils/auth'
 
 export default async function getAllPosts(req, res) {
   if (req.method === 'GET') {
     try {
       await db.connect()
+      
+      // Check if the user is an admin
+      if (!isAuth(req) || !isAdmin(req)) {
+        return res.status(403).json({ success: false, error: 'Forbidden' })
+      }
+
       const allPosts = await Post.find({})
       if (allPosts.length > 0) {
         res.status(200).json({ data: allPosts })
