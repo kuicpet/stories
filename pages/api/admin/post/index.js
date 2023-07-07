@@ -22,4 +22,5 @@ export default async function getAllPosts(req, res) {
       await db.disconnect()
     }
   }
+  return res.status(405).json({ message: 'Method Not Allowed' })
 }
