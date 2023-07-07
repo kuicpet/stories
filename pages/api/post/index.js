@@ -1,5 +1,5 @@
-import db from '../../../utils/db'
 import Post from '../../../models/Post'
+import db from '../../../utils/db'
 
 export default async function getAllPosts(req, res) {
   try {
