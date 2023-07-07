@@ -11,7 +11,12 @@ export default async function createPost(req, res) {
       res
         .status(201)
         .json({ message: 'Post created succesfully', data: savedPost })
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+      res.status(404).json({ error: error.message })
+    } finally {
+      await db.disconnect()
+    }
   } else {
     res.status(400).json({ message: 'Method not allowed' })
   }
