@@ -1,5 +1,5 @@
 import db from '../../../../utils/db'
-import Post from '../../../../models/User'
+import Post from '../../../../models/Post'
 
 export default async function getAllPosts(req, res) {
   if (req.method === 'GET') {
@@ -7,7 +7,7 @@ export default async function getAllPosts(req, res) {
       await db.connect()
       const allPosts = await Post.find({})
       if (allPosts.length > 0) {
-        res.status(200).json(allPosts)
+        res.status(200).json({ data: allPosts })
       } else {
         res.status(400).json({ message: 'No Posts Found' })
       }
