@@ -20,12 +20,16 @@ export default async function register(req, res) {
         return res.status(400).json({ message: 'Invalid password format' })
       }
 
+      // Determine the user role
+      const role = username === 'admin' ? 'admin' : 'user'
+      // Hash password
       const hashedPassword = await bcrypt.hash(password, 10)
 
       const newUser = await User.create({
         username,
         email,
         password: hashedPassword,
+        role,
       })
 
       const token = signToken(newUser)
@@ -35,6 +39,7 @@ export default async function register(req, res) {
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
+        role: newUser.role,
         message: 'User registration successful',
       })
     } catch (error) {

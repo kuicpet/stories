@@ -1,8 +1,16 @@
 import mongoose from 'mongoose'
 
-const connect = async () =>
-  mongoose.connect(`${process.env.NEXT_PUBLIC_MONGODB_URI}`)
-console.log('db connected')
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    console.log('db connected')
+  } catch (error) {
+    console.error('Failed to connect to the database:', error)
+  }
+}
 
 const disconnect = async () => {
   if (process.env.NODE_ENV === 'production') {
