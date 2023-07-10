@@ -37,6 +37,12 @@ const PostSchema = new Schema(
         },
       },
     ],
+    bookmarks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
     createdAt: {
       type: Date,
       default: new Date(),
