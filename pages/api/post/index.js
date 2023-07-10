@@ -5,7 +5,7 @@ export default async function getAllPosts(req, res) {
   if (req.method === 'GET') {
     try {
       await db.connect()
-      const allPosts = await Post.find({})
+      const allPosts = await Post.find().sort({ createdAt: -1 })
       if (allPosts.length > 0) {
         res.status(200).send({ data: allPosts })
       } else {
