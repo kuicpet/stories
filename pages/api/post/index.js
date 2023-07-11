@@ -5,13 +5,13 @@ export default async function getAllPosts(req, res) {
   if (req.method === 'GET') {
     try {
       await db.connect()
-      const allPosts = await Post.find().sort({ createdAt: -1 })
+      const allPosts = await Post.find({}).sort({ createdAt: -1 })
       if (allPosts.length > 0) {
-        res.status(200).send({ data: allPosts })
+        res.status(200).json(allPosts)
       } else {
         res.status(400).json({ message: 'No Posts Found' })
       }
-      await db.disconnect()
+      // await db.disconnect()
     } catch (error) {
       console.log(error)
       res.status(500).json({
