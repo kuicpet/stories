@@ -21,14 +21,15 @@ export default function Home() {
   }
   console.log(posts)
   return (
-    <div className={styles.container}>
+    <div className=''>
       <Head>
         <title>Stories</title>
         <meta name='description' content='Share your stories' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div>
-        <h1>Stories</h1>
+        
+        <h1 className='text-2xl'>Stories</h1>
         <div>
           {posts && posts.length > 0
             ? posts.map((post) => (

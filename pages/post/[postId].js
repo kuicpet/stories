@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { PostCard } from '../../component'
+import { PostCard } from '../../components'
 
 const PostDetails = () => {
   const router = useRouter()
