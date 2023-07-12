@@ -1,11 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { PostCard } from '../../component'
 
 const PostDetails = () => {
   const router = useRouter()
   const { postId } = router.query
-  
+
   const [post, setPost] = useState({})
   useEffect(() => {
     const fetchPost = async () => {
