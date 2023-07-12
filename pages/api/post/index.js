@@ -11,7 +11,6 @@ export default async function getAllPosts(req, res) {
       } else {
         res.status(400).json({ message: 'No Posts Found' })
       }
-      // await db.disconnect()
     } catch (error) {
       console.log(error)
       res.status(500).json({

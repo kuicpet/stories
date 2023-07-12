@@ -1,8 +1,8 @@
 import Head from 'next/head'
-
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -13,7 +13,7 @@ export default function Home() {
   const fetchPosts = async () => {
     try {
       const response = await axios.get('/api/post')
-      console.log(response.data)
+      // console.log(response.data)
       setPosts(response.data)
     } catch (error) {
       console.error(error)
@@ -31,7 +31,11 @@ export default function Home() {
         <h1>Stories</h1>
         <div>
           {posts && posts.length > 0
-            ? posts.map((i, post) => <div key={i}>{post.title}</div>)
+            ? posts.map((post) => (
+                <Link href={`/post/${post._id}`} key={post._id}>
+                  {post.title}
+                </Link>
+              ))
             : 'No Posts'}
         </div>
       </div>
