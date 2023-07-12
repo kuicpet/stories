@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className=''>
       <Head>
-        <title>Stories</title>
+        <title>Stories | Share your stories</title>
         <meta name='description' content='Share your stories' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
