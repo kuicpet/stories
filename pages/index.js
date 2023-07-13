@@ -30,7 +30,7 @@ export default function Home() {
       <div>
         
         <h1 className='text-2xl'>Stories</h1>
-        <div>
+        <div className=''>
           {posts && posts.length > 0
             ? posts.map((post) => (
                 <Link href={`/post/${post._id}`} key={post._id}>

@@ -11,9 +11,9 @@ function MyApp({ Component, pageProps }) {
 
   if (isSSR) return null
   return (
-    <div className='xl:w-[1200px] m-auto overflow-hidden h-[100vh] '>
+    <div className='xl:w-[1200px] m-auto'>
       <Header />
-      <div className='flex flex-col mt-4'>
+      <div className='flex flex-col items-center mt-4'>
         <Component {...pageProps} />
       </div>
       <Footer />
