@@ -14,9 +14,14 @@ const Header = () => {
           />
         </div>
       </Link>
-      <div className='flex gap-5 md:gap-10'>
-        <Link href={`/login`}>Login</Link>
-        <Link href={`/signup`}>Signup</Link>
+      <div className='flex items-center justify-evenly  lg:w-1/2 gap-5 md:gap-10'>
+        <Link href={`/create`}>Write your Stories</Link>
+        <Link href={`/login`}>Sign in</Link>
+        <Link
+          className='flex items-center justify-center  border-2 border-black px-4 py-1 rounded-full font-semibold bg-black text-white'
+          href={`/signup`}>
+          Get started
+        </Link>
       </div>
     </header>
   )

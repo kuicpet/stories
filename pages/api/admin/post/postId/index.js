@@ -1,6 +1,7 @@
-import Post from '../../../../models/Post'
-import db from '../../../../utils/db'
+import Post from '../../../../../models/Post'
+import db from '../../../../../utils/db'
 import mongoose from 'mongoose'
+import { isAuth, isAdmin } from '../../../../../utils/auth'
 
 const getPost = async (req, res) => {
   if (req.method === 'GET') {
