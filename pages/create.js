@@ -8,7 +8,7 @@ import useAuthStore from '../store/authStore'
 const CreatePost = () => {
   const router = useRouter()
   const { userProfile } = useAuthStore()
-  const userId = userProfile._id
+  const userId = userProfile?._id
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)

@@ -4,9 +4,11 @@ import { toast, Toaster } from 'react-hot-toast'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { Loader } from '../components'
+import useAuthStore from '../store/authStore'
 
 const Login = () => {
   const router = useRouter()
+  const { loginUser } = useAuthStore()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -21,9 +23,10 @@ const Login = () => {
           if (response.status === 200) {
             toast.success(response?.data?.message)
             // console.log(response)
-            // save user
+            // login user
+            loginUser(response?.data)
             // redirect user
-            router.push('/create')
+            router.push('/')
           } else {
             setLoading(false)
             toast.error(response?.data?.message)
