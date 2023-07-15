@@ -12,7 +12,10 @@ const getPost = async (req, res) => {
       if (!mongoose.Types.ObjectId.isValid(postId)) {
         return res.status(400).json({ message: 'Invalid post ID' })
       }
-      const post = await Post.findById(postId).populate('userId', 'username')
+      const post = await Post.findById(postId).populate([
+        { path: 'userId', select: 'username' },
+        { path: 'comments.user', select: 'username' },
+      ])
 
       if (!post) {
         return res.status(404).json({ message: 'Post not found' })

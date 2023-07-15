@@ -24,15 +24,20 @@ export default async function addComment(req, res) {
       }
       post.comments.push(comment)
 
-      const updatedPost = await post.save()
+      await post.save()
+
+      await post.populate('comments.user', 'username')
+      const commentUser = post.comments.find(
+        (comment) => comment.user._id.toString() === userId
+      )
 
       res.status(201).json({
         success: true,
         data: {
-          post: updatedPost,
+          post: post,
           commentUser: {
-            _id: user._id,
-            username: user.username,
+            _id: commentUser.user._id,
+            username: commentUser.user.username,
           },
         },
       })

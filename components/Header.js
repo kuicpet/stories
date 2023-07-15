@@ -10,11 +10,12 @@ const Header = () => {
     <header className='w-full flex justify-between items-center py-2 px-4 border-b-black border-2'>
       <Link href='/'>
         <div className='w-full md:w-[130px]'>
-          <Image
+          {/*<Image
             className='cursor-pointer border-2 border-black'
             src=''
             alt='Logo'
-          />
+  />*/}
+          <p className='cursor-pointer border-2 border-black px-3'>Logo</p>
         </div>
       </Link>
       <div className='flex items-center justify-evenly  lg:w-1/4 gap-5 md:gap-10'>

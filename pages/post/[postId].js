@@ -4,20 +4,26 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import moment from 'moment'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
+import { Loader } from '../../components'
 
 const PostDetails = () => {
   const router = useRouter()
   const { postId } = router.query
+  const [loading, setLoading] = useState(false)
 
   const [post, setPost] = useState({})
   useEffect(() => {
     const fetchPost = async () => {
       try {
+        setLoading(true)
         const response = await axios.get(`/api/post/postId?postId=${postId}`)
-        console.log(response.data)
+        // console.log(response.data)
         setPost(response.data)
+        setLoading(false)
       } catch (error) {
         console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchPost()
@@ -25,6 +31,11 @@ const PostDetails = () => {
 
   return (
     <section className='flex flex-col lg:w-3/4 w-full p-2 m-5'>
+      {loading && (
+        <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
+          <Loader />
+        </div>
+      )}
       <div className='my-4'>
         <Link className='font-semibold text-[blue] hover:underline' href={`/`}>
           Back to Stories
@@ -80,18 +91,16 @@ const PostDetails = () => {
           </div>
         </div>
         <div>
-          {post.comments?.map((item, i) => (
-            <>
-              <div key={i} className='flex flex-col border py-5 px-3'>
-                <div>
-                  <p className='font-semibold'>{item?.user}</p>
-                  <p className='text-[gray]'>
-                    {moment(item?.createdAt).fromNow()}
-                  </p>
-                </div>
-                <p className=''>{item?.content}</p>
+          {post.comments?.map((item) => (
+            <div key={item._id} className='flex flex-col border py-5 px-3'>
+              <div>
+                <p className='font-semibold'>{item?.user?.username}</p>
+                <p className='text-[gray]'>
+                  {moment(item?.createdAt).fromNow()}
+                </p>
               </div>
-            </>
+              <p className=''>{item?.content}</p>
+            </div>
           ))}
         </div>
       </div>
