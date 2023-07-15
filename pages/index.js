@@ -36,13 +36,15 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className='border border-black lg:w-3/4 w-full m-5'>
-        <h1 className='text-2xl'>Stories</h1>
+        <div className='border-b-black border-2 mb-2'>
+          <h1 className='text-2xl p-2'>Stories</h1>
+        </div>
         {loading && (
           <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
             <Loader />
           </div>
         )}
-        <div className='border border-black w-full flex flex-col'>
+        <div className='border border-black w-full flex flex-col shadow-lg'>
           {posts && posts.length > 0
             ? posts.map((post) => (
                 <Link href={`/post/${post._id}`} key={post._id}>
@@ -51,6 +53,8 @@ export default function Home() {
                     content={post.content}
                     timestamp={post.createdAt}
                     author={post.userId?.username}
+                    likes={post.likes.length}
+                    comments={post.comments.length}
                   />
                 </Link>
               ))

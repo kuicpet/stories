@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment/moment'
-import { LiaCommentDotsSolid, LiaHeart } from 'react-icons/lia'
+import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
 
 const PostCard = ({ title, content, author, timestamp, likes, comments }) => {
   return (
@@ -15,12 +15,24 @@ const PostCard = ({ title, content, author, timestamp, likes, comments }) => {
       </div>
       <div className='flex items-center justify-end'>
         <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-          <LiaHeart className='h-4' />
-          <p className='text-xs sm:text-base'>Like</p>
+          {likes > 0 ? (
+            <LiaHeartSolid className='h-4 text-[red]' />
+          ) : (
+            <LiaHeart className='h-4' />
+          )}
+          <p className='text-xs sm:text-base'>
+            {likes} {likes === 1 ? 'Like' : 'Likes'}
+          </p>
         </div>
         <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-          <LiaCommentDotsSolid className='h-4' />
-          <p className='text-xs sm:text-base'>Comment</p>
+          {comments > 0 ? (
+            <LiaCommentDotsSolid className='h-4 text-[blue]' />
+          ) : (
+            <LiaCommentDotsSolid className='h-4' />
+          )}
+          <p className='text-xs sm:text-base'>
+            {comments} {comments === 1 ? 'Comment' : 'Comments'}
+          </p>
         </div>
       </div>
     </section>
