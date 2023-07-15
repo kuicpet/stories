@@ -17,13 +17,14 @@ export default async function addComment(req, res) {
       if (!user) {
         return res.status(404).json({ success: false, error: 'User not found' })
       }
-
+      // Sort the comments in descending order based on their createdAt property
       const comment = {
         user: userId,
         content: content,
       }
       post.comments.push(comment)
 
+      post.comments.sort((a, b) => b.createdAt - a.createdAt)
       await post.save()
 
       await post.populate('comments.user', 'username')

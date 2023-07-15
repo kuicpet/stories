@@ -5,13 +5,17 @@ import { useRouter } from 'next/router'
 import moment from 'moment'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
 import { Loader } from '../../components'
+import useAuthStore from '../../store/authStore'
 
 const PostDetails = () => {
   const router = useRouter()
+  const { userProfile } = useAuthStore()
   const { postId } = router.query
   const [loading, setLoading] = useState(false)
+  const [comment, setComment] = useState('')
 
   const [post, setPost] = useState({})
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -29,6 +33,26 @@ const PostDetails = () => {
     fetchPost()
   }, [postId])
 
+  const handleSubmitComment = async (e) => {
+    e.preventDefault()
+    console.log({ postId, userId: userProfile._id, content: comment })
+    try {
+      setLoading(true)
+      const response = await axios.post('/api/comment', {
+        postId,
+        userId: userProfile._id, // Replace with the actual user ID or fetch it from your authentication system: ;
+        content: comment,
+      })
+      setPost(response.data.data.post) // Update the post with the new comment
+      setComment('') // Clear the comment input
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+      setLoading(false)
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <section className='flex flex-col lg:w-3/4 w-full p-2 m-5'>
       {loading && (
@@ -82,12 +106,25 @@ const PostDetails = () => {
         </div>
       </div>
       <div className='flex flex-col nw-full mt-2'>
-        <div className='flex items-center justify-between border-b border-black  w-full px-2 py-1'>
-          <div>
-            <h3>Comments</h3>
+        <div className='flex flex-col lg:flex-row items-center justify-between border-b border-black  w-full px-2 py-1'>
+          <div className='lg:w-[20%] w-full my-1'>
+            <h3 className=''>Comments</h3>
           </div>
-          <div className='flex items-center justify-center bg-black text-white px-3 py-1 rounded-full'>
-            <button>Add comment</button>
+          <div className='flex  lg:w-[80%] w-full border border-black rounded-full'>
+            <form
+              className='flex w-full items-center justify-between ml-2'
+              onSubmit={handleSubmitComment}>
+              <input
+                className='w-[60%] px-1 outline-none'
+                type='text'
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder='Write your comment here...'
+              />
+              <div className='flex items-center ml-auto justify-center bg-black text-white px-3 py-1 rounded-full border-none outline-none'>
+                <button>Add comment</button>
+              </div>
+            </form>
           </div>
         </div>
         <div>
