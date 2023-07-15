@@ -2,7 +2,7 @@ import Head from 'next/head'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Loader } from '../components'
+import { Loader, PostCard } from '../components'
 
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -27,7 +27,7 @@ export default function Home() {
       setLoading(false)
     }
   }
-
+  console.log(posts)
   return (
     <div className='w-full m-5 flex items-center justify-center'>
       <Head>
@@ -35,7 +35,7 @@ export default function Home() {
         <meta name='description' content='Share your stories' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div className='border border-black w-3/4 m-5'>
+      <div className='border border-black lg:w-3/4 w-full m-5'>
         <h1 className='text-2xl'>Stories</h1>
         {loading && (
           <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
@@ -46,7 +46,12 @@ export default function Home() {
           {posts && posts.length > 0
             ? posts.map((post) => (
                 <Link href={`/post/${post._id}`} key={post._id}>
-                  {post.title}
+                  <PostCard
+                    title={post.title}
+                    content={post.content}
+                    timestamp={post.createdAt}
+                    author={post.userId?.username}
+                  />
                 </Link>
               ))
             : 'No Posts'}
