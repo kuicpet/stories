@@ -1,17 +1,20 @@
 import React from 'react'
 import moment from 'moment/moment'
+import Link from 'next/link'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
 
-const PostCard = ({ title, content, author, timestamp, likes, comments }) => {
+const PostCard = ({ _id,title, content, author, timestamp, likes, comments }) => {
   return (
     <section className='flex flex-col m-2 shadow-md'>
       <div className='flex w-full items-center justify-between p-2'>
-        <p>By {author}</p>
+        <p>{author}</p>
         <p className='text-xs text-gray-600'>{moment(timestamp).fromNow()}</p>
       </div>
-      <div className='p-2'>
-        <h2 className='font-semibold text-lg'>{title}</h2>
-        <p>{content}</p>
+      <div className='p-2 border-b border-black'>
+        <Link href={`/post/${_id}`}>
+          <h2 className='font-semibold text-lg uppercase'>{title}</h2>
+          <p>{content}</p>
+        </Link>
       </div>
       <div className='flex items-center justify-end'>
         <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>

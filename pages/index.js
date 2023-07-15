@@ -7,6 +7,7 @@ import { Loader, PostCard } from '../components'
 export default function Home() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(false)
+  const MAX_CONTENT_LENGTH = 20
   useEffect(() => {
     fetchPosts()
   }, [])
@@ -27,6 +28,14 @@ export default function Home() {
       setLoading(false)
     }
   }
+
+  const shortenContent = (content) => {
+    if (content.split(' ').length > MAX_CONTENT_LENGTH) {
+      return content.split(' ').slice(0, MAX_CONTENT_LENGTH).join(' ') + '...'
+    }
+    return content
+  }
+
   console.log(posts)
   return (
     <div className='w-full m-5 flex items-center justify-center'>
@@ -35,8 +44,8 @@ export default function Home() {
         <meta name='description' content='Share your stories' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div className='border border-black lg:w-3/4 w-full m-5'>
-        <div className='border-b-black border-2 mb-2'>
+      <div className='lg:w-3/4 w-full m-5'>
+        <div className='border-b-2 border-black outline-none mb-2'>
           <h1 className='text-2xl p-2'>Stories</h1>
         </div>
         {loading && (
@@ -44,19 +53,20 @@ export default function Home() {
             <Loader />
           </div>
         )}
-        <div className='border border-black w-full flex flex-col shadow-lg'>
+        <div className=' w-full flex flex-col'>
           {posts && posts.length > 0
             ? posts.map((post) => (
-                <Link href={`/post/${post._id}`} key={post._id}>
+                <div key={post._id}>
                   <PostCard
+                    _id={post._id}
                     title={post.title}
-                    content={post.content}
+                    content={shortenContent(post.content)}
                     timestamp={post.createdAt}
                     author={post.userId?.username}
                     likes={post.likes.length}
                     comments={post.comments.length}
                   />
-                </Link>
+                </div>
               ))
             : 'No Posts'}
         </div>
