@@ -48,8 +48,11 @@ const PostDetails = () => {
             ) : (
               <LiaHeart className='h-4' />
             )}
-            <p className='text-xs sm:text-base'>
-              {post.likes?.length} {post.likes?.length === 1 ? 'Like' : 'Likes'}
+            <p className='flex text-xs sm:text-base'>
+              {post.likes?.length}
+              <span className='hidden lg:flex md:flex mx-1'>
+                {post.likes?.length === 1 ? 'Like' : 'Likes'}
+              </span>
             </p>
           </div>
           <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
@@ -58,9 +61,11 @@ const PostDetails = () => {
             ) : (
               <LiaCommentDotsSolid className='h-4' />
             )}
-            <p className='text-xs sm:text-base'>
+            <p className='flex text-xs sm:text-base'>
               {post.comments?.length}{' '}
-              {post.comments?.length === 1 ? 'Comment' : 'Comments'}
+              <span className='hidden lg:flex md:flex mx-1'>
+                {post.comments?.length === 1 ? 'Comment' : 'Comments'}
+              </span>
             </p>
           </div>
         </div>
@@ -80,7 +85,9 @@ const PostDetails = () => {
               <div key={i} className='flex flex-col border py-5 px-3'>
                 <div>
                   <p className='font-semibold'>{item?.user}</p>
-                  <p className='text-[gray]'>{moment(item?.createdAt).fromNow()}</p>
+                  <p className='text-[gray]'>
+                    {moment(item?.createdAt).fromNow()}
+                  </p>
                 </div>
                 <p className=''>{item?.content}</p>
               </div>
