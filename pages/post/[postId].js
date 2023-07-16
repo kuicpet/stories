@@ -14,11 +14,14 @@ const PostDetails = () => {
   const router = useRouter()
   const { userProfile } = useAuthStore()
   const { postId } = router.query
+  const [post, setPost] = useState({})
   const [loading, setLoading] = useState(false)
   const [comment, setComment] = useState('')
   const [showDelete, setShowDelete] = useState(false)
-
-  const [post, setPost] = useState({})
+  const { likes, setLikes } = useState(post.likes || [])
+  const [isLiked, setIsLiked] = useState(
+    post.likes && userProfile ? post.likes.includes(userProfile._id) : false
+  )
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -79,7 +82,6 @@ const PostDetails = () => {
         .delete(`/api/comment/delete`, {
           postId,
           commentId,
-          
         })
         .then((response) => {
           console.log(response)
@@ -89,6 +91,43 @@ const PostDetails = () => {
       console.log(error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleLikePost = async () => {
+    try {
+      if (!userProfile) {
+        // User is not authenticated, redirect to login page or show a message
+        toast.error('Please sign in to like the post')
+        return
+      }
+      if (isLiked) {
+        // User has already liked the post, so we need to unlike it
+        await axios
+          .post(`/api/post/unlike`, {
+            postId,
+            userId: userProfile._id,
+          })
+          .then((response) => {
+            console.log(response)
+          })
+        /* setLikes((prevLikes) =>
+          prevLikes.filter((like) => like !== userProfile._id)
+        )*/
+        setIsLiked(false)
+      } else {
+        // User hasn't liked the post yet, so we need to like it
+        await axios
+          .post(`/api/post/like`, { postId, userId: userProfile._id })
+          .then((response) => {
+            console.log(response)
+          })
+        // setLikes((prevLikes) => [...prevLikes, userProfile._id])
+        setIsLiked(true)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Failed to like/unlike the post')
     }
   }
 
@@ -117,8 +156,10 @@ const PostDetails = () => {
           <p>{moment(post.createdAt).fromNow()}</p>
         </div>
         <div className='flex'>
-          <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-            {post.likes?.length > 0 ? (
+          <div
+            onClick={handleLikePost}
+            className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
+            {isLiked && post.likes?.length > 0 ? (
               <LiaHeartSolid className='h-4 text-[red]' />
             ) : (
               <LiaHeart className='h-4' />
@@ -168,7 +209,7 @@ const PostDetails = () => {
               </form>
             </div>
           ) : (
-            <div>
+            <div className='lg:w-1/4 w-full'>
               <Link
                 className='text-[blue] font-semibold hover:underline'
                 href={`/login`}>

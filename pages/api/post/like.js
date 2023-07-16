@@ -12,24 +12,29 @@ export default async function toggleLikePost(req, res) {
         return res.status(404).json({ success: false, error: 'Post not found' })
       }
 
-      const userIndex = post.likes.findIndex((id) => id.toString() === userId)
+      // Check if the post is already liked by the user
+      const userLiked = post.likes.includes(userId)
 
-      if (userIndex === -1) {
-        // User hasn't liked the post yet, so add like
-        post.likes.push(userId)
+      if (userLiked) {
+        // User already liked the post, so we will unlike it
+        post.likes.pull(userId)
       } else {
-        // User has already liked the post, so remove like
-        post.likes.splice(userIndex, 1)
+        // User has not liked the post, so we will like it
+        post.likes.push(userId)
       }
 
       const updatedPost = await post.save()
 
-      res.status(201).json({
+      /*res.status(201).json({
         success: true,
-        date: {
+        data: {
           post: updatedPost,
           likedUsers: updatedPost.likes.map((user) => user.username),
         },
+      })*/
+      return res.status(200).json({
+        success: true,
+        data: { updatedPost, message: 'Post unliked successfully' },
       })
     } catch (error) {
       console.error(error)
