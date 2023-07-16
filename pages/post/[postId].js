@@ -110,22 +110,28 @@ const PostDetails = () => {
           <div className='lg:w-[20%] w-full my-1'>
             <h3 className=''>Comments</h3>
           </div>
-          <div className='flex  lg:w-[80%] w-full border border-black rounded-full'>
-            <form
-              className='flex w-full items-center justify-between ml-2'
-              onSubmit={handleSubmitComment}>
-              <input
-                className='w-[60%] px-1 outline-none'
-                type='text'
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder='Write your comment here...'
-              />
-              <div className='flex items-center ml-auto justify-center bg-black text-white px-3 py-1 rounded-full border-none outline-none'>
-                <button>Add comment</button>
-              </div>
-            </form>
-          </div>
+          {userProfile ? (
+            <div className='flex  lg:w-[80%] w-full border border-[blue] rounded-full'>
+              <form
+                className='flex w-full items-center justify-between ml-2'
+                onSubmit={handleSubmitComment}>
+                <input
+                  className='w-[60%] px-1 outline-none'
+                  type='text'
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder='Write your comment here...'
+                />
+                <div className='flex items-center ml-auto justify-center bg-[blue] text-white px-3 py-1 rounded-full border-none outline-none'>
+                  <button>Add comment</button>
+                </div>
+              </form>
+            </div>
+          ) : (
+            <div>
+              <Link className='text-[blue] font-semibold hover:underline' href={`/signin`}>Sign in to add Comments</Link>
+            </div>
+          )}
         </div>
         <div>
           {post.comments?.map((item) => (
