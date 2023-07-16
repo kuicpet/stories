@@ -135,7 +135,7 @@ const PostDetails = () => {
     <section className='flex flex-col lg:w-3/4 w-full p-2 m-5'>
       <Toaster />
       {loading && (
-        <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
+        <div className='fixed top-0 right-0 bottom-0 left-0 z-50 flex justify-center items-center bg-[rgba(0,0,0,0.5)]'>
           <Loader />
         </div>
       )}
@@ -159,7 +159,7 @@ const PostDetails = () => {
           <div
             onClick={handleLikePost}
             className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-            {isLiked && post.likes?.length > 0 ? (
+            {post.likes?.length > 0 ? (
               <LiaHeartSolid className='h-4 text-[red]' />
             ) : (
               <LiaHeart className='h-4' />
