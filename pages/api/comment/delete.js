@@ -5,14 +5,14 @@ export default async function deleteComment(req, res) {
   if (req.method === 'DELETE') {
     try {
       await db.connect()
-      const { postId, commentId, userId } = req.body
+      const { postId, commentId } = req.body
       const post = await Post.findById(postId)
 
       if (!post) {
         return res.status(404).json({ success: false, error: 'Post not found' })
       }
 
-      const commentIndex = post.comments.findIndex(
+      /*const commentIndex = post.comments.findIndex(
         (comment) =>
           comment._id.toString() === commentId &&
           comment.user.toString() === userId
@@ -25,9 +25,26 @@ export default async function deleteComment(req, res) {
       }
 
       post.comments.slice(commentIndex, 1)
-      const updatedPost = await post.save()
+      const updatedPost = await post.save()*/
+      const comment = await Comment.findById(commentId)
+      if (!comment) {
+        return res
+          .status(404)
+          .json({ success: false, error: 'Comment not found' })
+      }
 
-      res.status(200).json({ success: true, data: updatedPost })
+      // Ensure that the comment belongs to the correct post
+      if (comment.postId.toString() !== postId) {
+        return res.status(400).json({
+          success: false,
+          error: 'Comment does not belong to the specified post',
+        })
+      }
+
+      await comment.remove()
+      res
+        .status(200)
+        .json({ success: true, message: 'comment deleted successfully' })
     } catch (error) {
       console.error(error)
       res

@@ -35,6 +35,7 @@ export default async function addComment(req, res) {
       res.status(201).json({
         success: true,
         data: {
+          message: 'Comment added successfully',
           post: post,
           commentUser: {
             _id: commentUser.user._id,
