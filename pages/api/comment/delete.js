@@ -6,27 +6,13 @@ export default async function deleteComment(req, res) {
     try {
       await db.connect()
       const { postId, commentId } = req.body
-      const post = await Post.findById(postId)
 
+      const post = await Post.findById(postId)
       if (!post) {
         return res.status(404).json({ success: false, error: 'Post not found' })
       }
 
-      /*const commentIndex = post.comments.findIndex(
-        (comment) =>
-          comment._id.toString() === commentId &&
-          comment.user.toString() === userId
-      )
-
-      if (commentIndex === -1) {
-        return res
-          .status(404)
-          .json({ success: false, error: 'Comment not found' })
-      }
-
-      post.comments.slice(commentIndex, 1)
-      const updatedPost = await post.save()*/
-      const comment = await Comment.findById(commentId)
+      const comment = post.comments.find((comment) => comment.id === commentId)
       if (!comment) {
         return res
           .status(404)
@@ -41,10 +27,17 @@ export default async function deleteComment(req, res) {
         })
       }
 
-      await comment.remove()
+      // Remove the comment from the post's comments array
+      post.comments = post.comments.filter(
+        (comment) => comment.id !== commentId
+      )
+
+      // Save the updated post
+      await post.save()
+
       res
         .status(200)
-        .json({ success: true, message: 'comment deleted successfully' })
+        .json({ success: true, message: 'Comment deleted successfully' })
     } catch (error) {
       console.error(error)
       res

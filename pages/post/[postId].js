@@ -224,18 +224,28 @@ const PostDetails = () => {
               <div className='p-2'>
                 <div className='relative flex items-center justify-between'>
                   <p className='font-semibold'>{item?.user?.username}</p>
-                  <button onClick={() => handleToggle(item._id)}>
-                    <HiDotsHorizontal />
-                  </button>
+                  {userProfile && userProfile._id === item.user._id && (
+                    <button
+                      onClick={() => handleToggle(item._id)}
+                      className='px-1 rounded-md hover:bg-[lightgray]'>
+                      <HiDotsHorizontal />
+                    </button>
+                  )}
                   {showDelete === item._id && (
-                    <div className='flex items-center justify-center absolute right-0 top-5 rounded-md z-20'>
+                    <div className='flex flex-col items-start justify-center absolute right-0 top-5 rounded-md z-20 w-1/4 border border-gray-300 p-1'>
                       {userProfile && userProfile._id === item.user._id && (
-                        <button>
-                          <MdOutlineDeleteOutline
+                        <>
+                          <button
                             onClick={() => handleDeleteComment(item._id)}
-                            className='text-lg text-[red]'
-                          />
-                        </button>
+                            className='flex items-center justify-between border text-justify px-2 w-full hover:bg-gray-300'>
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDeleteComment(item._id)}
+                            className='flex items-center justify-between text-justify px-2 w-full hover:bg-gray-300'>
+                            Delete
+                          </button>
+                        </>
                       )}
                     </div>
                   )}
