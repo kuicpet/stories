@@ -32,11 +32,8 @@ const PostSchema = new Schema(
           type: String,
           required: true,
         },
-        createdAt: {
-          type: Date,
-          default: new Date(),
-        },
       },
+      { timestamps: true },
     ],
     bookmarks: [
       {

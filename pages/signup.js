@@ -51,7 +51,7 @@ const Signup = () => {
   }
 
   return (
-    <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2'>
+    <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2 rounded-md'>
       <Toaster />
       {loading && (
         <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
@@ -66,40 +66,44 @@ const Signup = () => {
         </div>
         <form className='m-3 p-2' onSubmit={handleSubmit}>
           <div className='mb-2'>
-            <label>Username</label>
+            <label>Username <span className='text-[red]'>*</span></label>
             <input
               type='text'
               value={username}
+              required
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Enter your Username'
               className='border border-black w-full p-1.5'
             />
           </div>
           <div className='mb-2'>
-            <label>Email</label>
+            <label>Email <span className='text-[red]'>*</span></label>
             <input
               type='email'
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Email'
               className='border border-black w-full p-1.5'
             />
           </div>
           <div className='mb-2'>
-            <label>Password</label>
+            <label>Password <span className='text-[red]'>*</span></label>
             <input
               type='password'
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
               className='border border-black w-full p-1.5'
             />
           </div>
           <div className='mb-2'>
-            <label>Confirm Password</label>
+            <label>Confirm Password <span className='text-[red]'>*</span></label>
             <input
               type='password'
               value={confirmPassword}
+              required
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder='Confirm password'
               className='border border-black w-full p-1.5'
@@ -109,7 +113,7 @@ const Signup = () => {
             <button
               disabled={!username || !email || !password || !confirmPassword}
               type='submit'
-              className='w-full border border-black p-2 disabled:cursor-not-allowed rounded-full'>
+              className='w-full outline-none border-none disabled:bg-[gray] p-2 disabled:cursor-not-allowed rounded-full text-white bg-[blue]'>
               Sign up
             </button>
           </div>

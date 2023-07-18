@@ -43,7 +43,7 @@ const Login = () => {
   }
 
   return (
-    <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2'>
+    <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2 rounded-md'>
       <Toaster />
       {loading && (
         <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
@@ -56,7 +56,9 @@ const Login = () => {
         </div>
         <form className='m-3 p-2' onSubmit={handleSubmit}>
           <div className='mb-2'>
-            <label>Username</label>
+            <label>
+              Username <span className='text-[red]'>*</span>
+            </label>
             <input
               type='text'
               value={username}
@@ -66,7 +68,9 @@ const Login = () => {
             />
           </div>
           <div className='mb-2'>
-            <label>Password</label>
+            <label>
+              Password <span className='text-[red]'>*</span>
+            </label>
             <input
               type='password'
               value={password}
@@ -79,7 +83,7 @@ const Login = () => {
             <button
               disabled={!username || !password}
               type='submit'
-              className='w-full border border-black p-2 disabled:cursor-not-allowed rounded-full'>
+              className='w-full outline-none border-none p-2 disabled:bg-[gray]  disabled:cursor-not-allowed rounded-full bg-[blue] text-white'>
               Login
             </button>
           </div>
