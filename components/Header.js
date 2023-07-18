@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { LiaEdit } from 'react-icons/lia'
 import useAuthStore from '../store/authStore'
+import { AiOutlineUser } from 'react-icons/ai'
 
 const Header = () => {
   const { userProfile, logoutUser } = useAuthStore()
+  const [showDropDown, setShowDropDown] = useState(false)
+
+  const handleToggleDropDown = () => {
+    setShowDropDown(!showDropDown)
+  }
   return (
     <header className='w-full flex justify-between items-center py-2 px-4 border-b-black border-2'>
       <Link href='/'>
@@ -18,18 +24,38 @@ const Header = () => {
           <p className='cursor-pointer border-2 border-black px-3'>Logo</p>
         </div>
       </Link>
-      <div className='flex items-center justify-evenly  lg:w-1/4 gap-5 md:gap-10'>
+      <div className='relative flex items-center justify-evenly  lg:w-1/4 gap-5 md:gap-10'>
         {userProfile ? (
           <>
             <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
               <LiaEdit className='h-4' />
               <Link href={`/create`}>Write</Link>
             </div>
-            <button
-              className='flex items-center justify-center  px-4 py-1 rounded-full font-semibold'
-              onClick={() => logoutUser()}>
-              Sign out
-            </button>
+
+            <div
+              onClick={handleToggleDropDown}
+              className='p-1 rounded-full bg-[lightgray] cursor-pointer'>
+              <AiOutlineUser className='w-full text-xl' />
+            </div>
+            {showDropDown && (
+              <div className='absolute z-30 top-10 right-0 bg-white w-[150px]  p-2 rounded-lg shadow-lg'>
+                <ul className=''>
+                  <li className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold cursor-pointer'>
+                    Profile
+                  </li>
+                  <li className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold cursor-pointer'>
+                    Dashboard
+                  </li>
+                  <li>
+                    <button
+                      className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold'
+                      onClick={() => logoutUser()}>
+                      Sign out
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </>
         ) : (
           <>

@@ -3,7 +3,15 @@ import moment from 'moment/moment'
 import Link from 'next/link'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
 
-const PostCard = ({ _id,title, content, author, timestamp, likes, comments }) => {
+const PostCard = ({
+  _id,
+  title,
+  content,
+  author,
+  timestamp,
+  likes,
+  comments,
+}) => {
   return (
     <section className='flex flex-col m-2 shadow-md'>
       <div className='flex w-full items-center justify-between p-2'>
@@ -18,21 +26,13 @@ const PostCard = ({ _id,title, content, author, timestamp, likes, comments }) =>
       </div>
       <div className='flex items-center justify-end'>
         <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-          {likes > 0 ? (
-            <LiaHeartSolid className='h-4 text-[red]' />
-          ) : (
-            <LiaHeart className='h-4' />
-          )}
+          <LiaHeart className='h-4' />
           <p className='text-xs sm:text-base'>
             {likes} {likes === 1 ? 'Like' : 'Likes'}
           </p>
         </div>
         <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-          {comments > 0 ? (
-            <LiaCommentDotsSolid className='h-4 text-[blue]' />
-          ) : (
-            <LiaCommentDotsSolid className='h-4' />
-          )}
+          <LiaCommentDotsSolid className='h-4' />
           <p className='text-xs sm:text-base'>
             {comments} {comments === 1 ? 'Comment' : 'Comments'}
           </p>
