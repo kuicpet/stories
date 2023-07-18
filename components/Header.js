@@ -40,15 +40,22 @@ const Header = () => {
             {showDropDown && (
               <div className='absolute z-30 top-10 right-0 bg-white w-[150px]  p-2 rounded-lg shadow-lg'>
                 <ul className=''>
-                  <li className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold cursor-pointer'>
+                  <li className='flex flex-col border-b border-black justify-start py-1'>
+                    <p className='text-left'>{userProfile?.username}</p>
+                    <p>{userProfile?.email}</p>
+                  </li>
+                  <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
                     Profile
+                  </li>
+                  <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
+                    Write Story
                   </li>
                   <li className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold cursor-pointer'>
                     Dashboard
                   </li>
                   <li>
                     <button
-                      className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold'
+                      className='flex  text-[red] items-center justify-start  px-4 py-1 rounded-full hover:font-semibold'
                       onClick={() => logoutUser()}>
                       Sign out
                     </button>
