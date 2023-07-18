@@ -15,10 +15,10 @@ const PostCard = ({
   return (
     <section className='flex flex-col m-2 shadow-md'>
       <div className='flex w-full items-center justify-between p-2'>
-        <p>{author}</p>
+        <p className='capitalize'>{author}</p>
         <p className='text-xs text-gray-600'>{moment(timestamp).fromNow()}</p>
       </div>
-      <div className='p-2 border-b border-black'>
+      <div className='p-2 border-b border-black hover:text-[blue]'>
         <Link href={`/post/${_id}`}>
           <h2 className='font-semibold text-lg uppercase'>{title}</h2>
           <p>{content}</p>

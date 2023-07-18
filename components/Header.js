@@ -13,6 +13,7 @@ const Header = () => {
   const handleToggleDropDown = () => {
     setShowDropDown(!showDropDown)
   }
+  
   return (
     <header className='w-full flex justify-between items-center py-2 px-4 border-b-black border-2'>
       <Link href='/'>
@@ -39,7 +40,7 @@ const Header = () => {
               <AiOutlineUser className='w-full text-xl' />
             </div>
             {showDropDown && (
-              <div className='absolute z-30 top-10 right-0 bg-white w-[150px]  p-2 rounded-lg shadow-lg'>
+              <div className='absolute z-30 top-10 right-0 bg-white w-[200px]  p-2 rounded-lg shadow-lg'>
                 <ul className=''>
                   <li className='flex flex-col border-b border-black justify-start py-1'>
                     <p className='text-left capitalize'>Hi, {userProfile?.username}</p>
