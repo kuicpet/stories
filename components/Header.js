@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { LiaEdit } from 'react-icons/lia'
 import useAuthStore from '../store/authStore'
 import { AiOutlineUser } from 'react-icons/ai'
+import { LiaSignOutAltSolid } from 'react-icons/lia'
 
 const Header = () => {
   const { userProfile, logoutUser } = useAuthStore()
@@ -41,14 +42,13 @@ const Header = () => {
               <div className='absolute z-30 top-10 right-0 bg-white w-[150px]  p-2 rounded-lg shadow-lg'>
                 <ul className=''>
                   <li className='flex flex-col border-b border-black justify-start py-1'>
-                    <p className='text-left'>{userProfile?.username}</p>
-                    <p>{userProfile?.email}</p>
+                    <p className='text-left capitalize'>Hi, {userProfile?.username}</p>
                   </li>
                   <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
                     Profile
                   </li>
                   <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
-                    Write Story
+                    <Link href={`/create`}>Write Story</Link>
                   </li>
                   <li className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold cursor-pointer'>
                     Dashboard
@@ -57,6 +57,7 @@ const Header = () => {
                     <button
                       className='flex  text-[red] items-center justify-start  px-4 py-1 rounded-full hover:font-semibold'
                       onClick={() => logoutUser()}>
+                      <LiaSignOutAltSolid className='mr-1' />
                       Sign out
                     </button>
                   </li>
