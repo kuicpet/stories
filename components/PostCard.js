@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment/moment'
 import Link from 'next/link'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
+import { HiOutlineBookmark, HiBookmark } from 'react-icons/hi'
 
 const PostCard = ({
   _id,
@@ -11,12 +12,16 @@ const PostCard = ({
   timestamp,
   likes,
   comments,
+  isBookmarked,
 }) => {
   return (
     <section className='flex flex-col m-2 shadow-md'>
       <div className='flex w-full items-center justify-between p-2'>
-        <p className=''>{author}</p>
-        <p className='text-xs text-gray-600'>{moment(timestamp).fromNow()}</p>
+        <div>
+          <p className=''>{author}</p>
+          <p className='text-xs text-gray-600'>{moment(timestamp).fromNow()}</p>
+        </div>
+        <div>{isBookmarked ? <HiBookmark /> : <HiOutlineBookmark />}</div>
       </div>
       <div className='p-2 border-b border-black hover:text-[blue]'>
         <Link href={`/post/${_id}`}>

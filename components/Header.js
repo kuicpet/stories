@@ -43,16 +43,18 @@ const Header = () => {
               <div className='absolute z-30 top-10 right-0 bg-white w-[200px]  p-2 rounded-lg shadow-lg'>
                 <ul className=''>
                   <li className='flex flex-col border-b border-black justify-start py-1'>
-                    <p className='text-left capitalize'>Hi, {userProfile?.username}</p>
+                    <p className='text-left capitalize'>
+                      Hi, {userProfile?.username}
+                    </p>
                   </li>
                   <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
-                    Profile
+                    <Link href={`/profile`}>Profile</Link>
                   </li>
                   <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
                     <Link href={`/create`}>Write Story</Link>
                   </li>
                   <li className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold cursor-pointer'>
-                    Dashboard
+                    <Link href={`/dashboard`}>Dashboard</Link>
                   </li>
                   <li>
                     <button
