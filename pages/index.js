@@ -36,7 +36,7 @@ export default function Home() {
     return content
   }
 
-  console.log(posts)
+  // console.log(posts)
   return (
     <div className='w-full m-5 flex items-center justify-center'>
       <Head>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import { LiaEdit } from 'react-icons/lia'
@@ -7,13 +8,14 @@ import { AiOutlineUser } from 'react-icons/ai'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
 
 const Header = () => {
+  const router = useRouter()
   const { userProfile, logoutUser } = useAuthStore()
   const [showDropDown, setShowDropDown] = useState(false)
 
   const handleToggleDropDown = () => {
     setShowDropDown(!showDropDown)
   }
-  
+
   return (
     <header className='w-full flex justify-between items-center py-2 px-4 border-b-black border-2'>
       <Link href='/'>
@@ -59,7 +61,10 @@ const Header = () => {
                   <li>
                     <button
                       className='flex  text-[red] items-center justify-start  px-4 py-1 rounded-full hover:font-semibold'
-                      onClick={() => logoutUser()}>
+                      onClick={() => {
+                        logoutUser()
+                        router.push('/')
+                      }}>
                       <LiaSignOutAltSolid className='mr-1' />
                       Sign out
                     </button>

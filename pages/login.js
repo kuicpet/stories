@@ -50,7 +50,7 @@ const Login = () => {
           <Loader />
         </div>
       )}
-      <div className='lg:w-[90%]'>
+      <div className='lg:w-[90%] w-full'>
         <div className='flex items-center justify-center'>
           <h1 className='text-xl font-semibold'>Welcome back.</h1>
         </div>

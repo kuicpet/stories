@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import moment from 'moment'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
+import { HiOutlineBookmark, HiBookmark } from 'react-icons/hi'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { MdOutlineDeleteOutline } from 'react-icons/md'
 import { Loader } from '../../components'
@@ -18,6 +19,7 @@ const PostDetails = () => {
   const [loading, setLoading] = useState(false)
   const [comment, setComment] = useState('')
   const [showDelete, setShowDelete] = useState(false)
+  const [isBookmarked, setIsBookmarked] = useState(false)
   const { likes, setLikes } = useState(post.likes || [])
   const [isLiked, setIsLiked] = useState(
     post.likes && userProfile ? post.likes.includes(userProfile._id) : false
@@ -131,6 +133,29 @@ const PostDetails = () => {
     }
   }
 
+  const handleBookmarkPost = async () => {
+    try {
+      if (!userProfile) {
+        toast.error('Please sign in to bookmark the post')
+        return
+      }
+      const response = await axios.post(`/api/post/bookmark`, {
+        postId,
+        userId: userProfile?._id,
+      })
+
+      if (response.status === 200) {
+        setIsBookmarked((prev) => !prev)
+        toast.success(response.data.message)
+      } else {
+        toast.error(response.data.error)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Failed to bookmark/unbookmark the post')
+    }
+  }
+
   return (
     <section className='flex flex-col lg:w-3/4 w-full p-2 m-5'>
       <Toaster />
@@ -155,7 +180,19 @@ const PostDetails = () => {
           <p className='mr-5 font-semibold'>{post?.userId?.username}</p>
           <p>{moment(post.createdAt).fromNow()}</p>
         </div>
-        <div className='flex'>
+        <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
+          <div
+            onClick={handleBookmarkPost}
+            className='flex items-center justify-center'>
+            {isBookmarked ? (
+              <HiBookmark className='h-4' />
+            ) : (
+              <HiOutlineBookmark className='h-4' />
+            )}
+            <p className='hidden lg:flex md:flex mx-1'>
+              {isBookmarked ? 'Bookmarked' : 'Bookmark Post'}
+            </p>
+          </div>
           <div
             onClick={handleLikePost}
             className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
