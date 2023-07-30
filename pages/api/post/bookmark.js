@@ -22,9 +22,9 @@ export default async function bookmarkPost(req, res) {
       const isBookmarked = user?.bookmarks?.includes(postId)
 
       if (isBookmarked) {
-        user?.bookmarks?.pull(postId)
+        user.bookmarks?.pull(postId)
       } else {
-        user?.bookmarks?.push(postId)
+        user.bookmarks?.push(postId)
       }
 
       // Save the user's updated bookmarks
@@ -33,7 +33,10 @@ export default async function bookmarkPost(req, res) {
 
       res.status(200).json({
         success: true,
-        message: 'Post bookmarked successfully',
+        data: {
+          post,
+          message: 'Post bookmarked successfully',
+        },
       })
     } catch (error) {
       console.error(error)

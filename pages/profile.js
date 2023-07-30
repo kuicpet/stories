@@ -7,15 +7,15 @@ const Profile = () => {
   const { userProfile } = useAuthStore()
   useEffect(() => {
     if (!userProfile) {
-      return router.push(`/login`)
+      router.push(`/login`)
     }
   }, [router, userProfile])
   return (
     <div>
       {userProfile && (
         <>
-          <h1>Welcome, {userProfile.username}</h1>
-          <p>Email: {userProfile.email}</p>
+          <h1>Hi, {userProfile?.username}</h1>
+          <p>Email: {userProfile?.email}</p>
           {/* Display other profile information here */}
         </>
       )}

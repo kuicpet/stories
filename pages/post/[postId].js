@@ -136,17 +136,26 @@ const PostDetails = () => {
   const handleBookmarkPost = async () => {
     try {
       if (!userProfile) {
-        toast.error('Please sign in to bookmark the post')
+        toast.error('Please sign in to bookmark the post', {
+          style: {
+            color: 'red',
+            backgroundColor: '#ffebee',
+          },
+        })
         return
       }
       const response = await axios.post(`/api/post/bookmark`, {
         postId,
         userId: userProfile?._id,
       })
-
+      // console.log(response)
       if (response.status === 200) {
         setIsBookmarked((prev) => !prev)
-        toast.success(response.data.message)
+        toast.success(response.data.message, {
+          style: {
+            backgroundColor: '#e0f5e6',
+          },
+        })
       } else {
         toast.error(response.data.error)
       }

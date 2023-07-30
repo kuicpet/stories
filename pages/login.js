@@ -8,6 +8,7 @@ import useAuthStore from '../store/authStore'
 
 const Login = () => {
   const router = useRouter()
+  const { redirect } = router.query
   const { loginUser } = useAuthStore()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -21,7 +22,11 @@ const Login = () => {
         .post(`/api/user/login`, { username, password })
         .then((response) => {
           if (response.status === 200) {
-            toast.success(response?.data?.message)
+            toast.success(response?.data?.message, {
+              style: {
+                backgroundColor: '#e0f5e6',
+              },
+            })
             // console.log(response)
             // login user
             loginUser(response?.data)
@@ -29,7 +34,12 @@ const Login = () => {
             router.push('/')
           } else {
             setLoading(false)
-            toast.error(response?.data?.message)
+            toast.error(response?.data?.message, {
+              style: {
+                color: 'red',
+                backgroundColor: '#ffebee',
+              },
+            })
             return
           }
         })
@@ -81,7 +91,7 @@ const Login = () => {
           </div>
           <div className='my-7'>
             <button
-              disabled={!username || !password}
+              disabled={!username || !password || password.length <= 5}
               type='submit'
               className='w-full outline-none border-none p-2 disabled:bg-[gray]  disabled:cursor-not-allowed rounded-full bg-[blue] text-white'>
               Login
@@ -90,10 +100,10 @@ const Login = () => {
         </form>
         <div className='flex justify-center mb-2'>
           <p>
-            No account?{' '}
+            Don&apos;t have an Account? &nbsp;{' '}
             <Link
               className='text-[blue] font-semibold hover:underline'
-              href={`/signup`}>
+              href={`/signup?redirect=${redirect || '/'}`}>
               Create one
             </Link>
           </p>

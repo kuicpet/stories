@@ -8,6 +8,7 @@ import useAuthStore from '../store/authStore'
 
 const Signup = () => {
   const router = useRouter()
+  const { redirect } = router.query
   const { registerUser } = useAuthStore()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,14 +32,23 @@ const Signup = () => {
         })
         .then((response) => {
           if (response.status === 201) {
-            toast.success(response?.data?.message)
+            toast.success(response?.data?.message, {
+              style: {
+                backgroundColor: '#e0f5e6',
+              },
+            })
             // save user
             registerUser(response?.data)
             // redirect user
             router.push(`/login`)
           } else {
             setLoading(false)
-            toast.error(response?.data?.message)
+            toast.error(response?.data?.message, {
+              style: {
+                color: 'red',
+                backgroundColor: '#ffebee',
+              },
+            })
             return
           }
         })
@@ -66,7 +76,9 @@ const Signup = () => {
         </div>
         <form className='m-3 p-2' onSubmit={handleSubmit}>
           <div className='mb-2'>
-            <label>Username <span className='text-[red]'>*</span></label>
+            <label>
+              Username <span className='text-[red]'>*</span>
+            </label>
             <input
               type='text'
               value={username}
@@ -77,18 +89,23 @@ const Signup = () => {
             />
           </div>
           <div className='mb-2'>
-            <label>Email <span className='text-[red]'>*</span></label>
+            <label>
+              Email <span className='text-[red]'>*</span>
+            </label>
             <input
               type='email'
               value={email}
               required
+              pattern='/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/'
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Email'
               className='border border-black w-full p-1.5'
             />
           </div>
           <div className='mb-2'>
-            <label>Password <span className='text-[red]'>*</span></label>
+            <label>
+              Password <span className='text-[red]'>*</span>
+            </label>
             <input
               type='password'
               value={password}
@@ -99,7 +116,9 @@ const Signup = () => {
             />
           </div>
           <div className='mb-2'>
-            <label>Confirm Password <span className='text-[red]'>*</span></label>
+            <label>
+              Confirm Password <span className='text-[red]'>*</span>
+            </label>
             <input
               type='password'
               value={confirmPassword}
@@ -111,7 +130,13 @@ const Signup = () => {
           </div>
           <div className='my-7'>
             <button
-              disabled={!username || !email || !password || !confirmPassword}
+              disabled={
+                !username ||
+                !email ||
+                !password ||
+                !confirmPassword ||
+                password.length <= 5
+              }
               type='submit'
               className='w-full outline-none border-none disabled:bg-[gray] p-2 disabled:cursor-not-allowed rounded-full text-white bg-[blue]'>
               Sign up
@@ -120,10 +145,10 @@ const Signup = () => {
         </form>
         <div className='flex justify-center mb-2'>
           <p>
-            Already have an account?{' '}
+            Have an account?{' '}
             <Link
               className='text-[blue] font-semibold hover:underline'
-              href={`/login`}>
+              href={`/login?redirect=${redirect || '/'}`}>
               Sign in
             </Link>
           </p>
