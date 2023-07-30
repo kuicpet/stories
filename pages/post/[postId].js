@@ -7,7 +7,7 @@ import moment from 'moment'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
 import { HiOutlineBookmark, HiBookmark } from 'react-icons/hi'
 import { HiDotsHorizontal } from 'react-icons/hi'
-import { MdOutlineDeleteOutline } from 'react-icons/md'
+import { FiChevronLeft } from 'react-icons/fi'
 import { Loader } from '../../components'
 import useAuthStore from '../../store/authStore'
 
@@ -173,8 +173,10 @@ const PostDetails = () => {
           <Loader />
         </div>
       )}
-      <div className='my-4'>
-        <Link className='font-semibold text-[blue] hover:underline' href={`/`}>
+      <div className='my-4 flex items-center'>
+        <Link
+          className='flex items-center  font-semibold text-[blue] hover:underline'
+          href={`/`}>
           Back to Stories
         </Link>
       </div>
