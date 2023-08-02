@@ -38,7 +38,7 @@ const Header = () => {
 
             <div
               onClick={handleToggleDropDown}
-              className='p-1 rounded-full bg-[lightgray] cursor-pointer'>
+              className='p-1 rounded-full bg-[#e9e8e8] cursor-pointer hover:bg-[lightgray]'>
               <AiOutlineUser className='w-full text-xl' />
             </div>
             {showDropDown && (

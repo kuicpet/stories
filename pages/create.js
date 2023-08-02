@@ -22,14 +22,23 @@ const CreatePost = () => {
         .post(`/api/post/create`, { title, content, userId })
         .then((response) => {
           if (response.status === 201) {
-            toast.success(response?.data?.message)
+            toast.success(response?.data?.message, {
+              style: {
+                backgroundColor: '#e0f5e6',
+              },
+            })
             // console.log(response)
-            // save user
+            // save post
             // redirect
             router.push('/')
           } else {
             setLoading(false)
-            toast.error(response?.data?.message)
+            toast.error(response?.data?.message, {
+              style: {
+                color: 'red',
+                backgroundColor: '#ffebee',
+              },
+            })
             return
           }
         })
@@ -76,7 +85,7 @@ const CreatePost = () => {
             <button
               disabled={!title || !content}
               type='submit'
-              className='w-full border border-black p-2 disabled:cursor-not-allowed rounded-full'>
+              className='w-full border border-black p-2 disabled:cursor-not-allowed rounded-full bg-[blue] text-white disabled:bg-[gray]'>
               Post Story
             </button>
           </div>
