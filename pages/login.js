@@ -53,14 +53,14 @@ const Login = () => {
   }
 
   return (
-    <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2 rounded-md'>
+    <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2 rounded-md bg-[#f2efe6]'>
       <Toaster />
       {loading && (
         <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
           <Loader />
         </div>
       )}
-      <div className='lg:w-[90%] w-full'>
+      <div className='lg:w-[90%] w-full '>
         <div className='flex items-center justify-center'>
           <h1 className='text-xl font-semibold'>Welcome back.</h1>
         </div>
@@ -74,7 +74,7 @@ const Login = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Enter your Username'
-              className='border border-black w-full p-1.5'
+              className='border border-black w-full p-1.5 bg-[#ededed]'
             />
           </div>
           <div className='mb-2'>
@@ -86,14 +86,14 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
-              className='border border-black w-full p-1.5'
+              className='border border-black w-full p-1.5 bg-[#ededed]'
             />
           </div>
           <div className='my-7'>
             <button
               disabled={!username || !password || password.length <= 5}
               type='submit'
-              className='w-full outline-none border-none p-2 disabled:bg-[gray]  disabled:cursor-not-allowed rounded-full bg-[blue] text-white'>
+              className='w-full outline-none border-none p-2 disabled:bg-[gray]  disabled:cursor-not-allowed rounded-full bg-[#728dc4] text-white'>
               Login
             </button>
           </div>
@@ -102,7 +102,7 @@ const Login = () => {
           <p>
             Don&apos;t have an Account? &nbsp;{' '}
             <Link
-              className='text-[blue] font-semibold hover:underline'
+              className='text-[#5765f2] font-semibold hover:underline'
               href={`/signup?redirect=${redirect || '/'}`}>
               Create one
             </Link>

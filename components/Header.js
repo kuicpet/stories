@@ -17,7 +17,7 @@ const Header = () => {
   }
 
   return (
-    <header className='w-full flex justify-between items-center py-2 px-4 border-b-black border-2'>
+    <header className='w-full flex justify-between items-center py-2 px-4  bg-[hsla(51,36%,83%,.5)]'>
       <Link href='/'>
         <div className='w-full md:w-[130px]'>
           {/*<Image
