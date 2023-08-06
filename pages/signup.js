@@ -85,7 +85,7 @@ const Signup = () => {
               required
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Enter your Username'
-              className='border border-black w-full p-1.5 bg-[#ededed]'
+              className='border border-black w-full p-1.5 bg-[#ededed] outline-none'
             />
           </div>
           <div className='mb-2'>
@@ -99,7 +99,7 @@ const Signup = () => {
               pattern='/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/'
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Email'
-              className='border border-black w-full p-1.5 bg-[#ededed]'
+              className='border border-black w-full p-1.5 bg-[#ededed] outline-none'
             />
           </div>
           <div className='mb-2'>
@@ -112,7 +112,7 @@ const Signup = () => {
               required
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
-              className='border border-black w-full p-1.5 bg-[#ededed]'
+              className='border border-black w-full p-1.5 bg-[#ededed] outline-none'
             />
           </div>
           <div className='mb-2'>
@@ -125,7 +125,7 @@ const Signup = () => {
               required
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder='Confirm password'
-              className='border border-black w-full p-1.5 bg-[#ededed]'
+              className='border border-black w-full p-1.5 bg-[#ededed] outline-none'
             />
           </div>
           <div className='my-7'>
@@ -138,7 +138,7 @@ const Signup = () => {
                 password.length <= 5
               }
               type='submit'
-              className='w-full outline-none border-none disabled:bg-[gray] p-2 disabled:cursor-not-allowed rounded-full text-white bg-[#728dc4]'>
+              className='w-full outline-none border border-black  font-semibold disabled:bg-[gray] p-2 disabled:cursor-not-allowed rounded-full  bg-[#ace5d4] text-black disabled:text-white'>
               Sign up
             </button>
           </div>

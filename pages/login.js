@@ -74,7 +74,7 @@ const Login = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Enter your Username'
-              className='border border-black w-full p-1.5 bg-[#ededed]'
+              className='border border-black w-full p-1.5 bg-[#ededed] outline-none'
             />
           </div>
           <div className='mb-2'>
@@ -86,14 +86,14 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
-              className='border border-black w-full p-1.5 bg-[#ededed]'
+              className='border border-black w-full p-1.5 bg-[#ededed] outline-none'
             />
           </div>
           <div className='my-7'>
             <button
               disabled={!username || !password || password.length <= 5}
               type='submit'
-              className='w-full outline-none border-none p-2 disabled:bg-[gray]  disabled:cursor-not-allowed rounded-full bg-[#728dc4] text-white'>
+              className='w-full outline-none border border-black p-2 disabled:bg-[gray] font-semibold disabled:cursor-not-allowed rounded-full bg-[#ace5d4] text-black disabled:text-white'>
               Login
             </button>
           </div>

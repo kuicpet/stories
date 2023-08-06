@@ -13,7 +13,7 @@ const PostCard = ({
   comments,
 }) => {
   return (
-    <section className='flex flex-col m-2 shadow-md'>
+    <section className='flex flex-col m-2 shadow-md border border-black rounded-lg'>
       <div className='flex w-full items-center justify-between p-2'>
         <div>
           <p className=''>{author}</p>

@@ -3,5 +3,6 @@ import Footer from './Footer'
 import Header from './Header'
 import Button from './Button'
 import Loader from './Loader'
+import Meta from './Meta'
 
-export { PostCard, Header, Footer, Loader, Button }
+export { PostCard, Header, Footer, Loader, Button, Meta }
