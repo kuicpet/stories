@@ -1,7 +1,10 @@
 import React from 'react'
+import { Meta } from '../components'
 
 const UserDashboard = () => {
-  return <div>UserDashboard</div>
+  return <section>
+    <Meta title='Dashboard' />
+    UserDashboard</section>
 }
 
 export default UserDashboard

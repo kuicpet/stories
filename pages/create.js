@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { Loader } from '../components'
+import { Loader, Meta } from '../components'
 import useAuthStore from '../store/authStore'
 
 const CreatePost = () => {
@@ -51,6 +51,7 @@ const CreatePost = () => {
 
   return (
     <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2'>
+      <Meta title='Write your Story' description='write your story' />
       <Toaster />
       {loading && (
         <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>

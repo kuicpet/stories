@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import useAuthStore from '../store/authStore'
+import { Meta } from '../components'
 
 const Profile = () => {
   const router = useRouter()
@@ -11,7 +12,8 @@ const Profile = () => {
     }
   }, [router, userProfile])
   return (
-    <div>
+    <section>
+      <Meta title='Profile' />
       {userProfile && (
         <>
           <h1>Hi, {userProfile?.username}</h1>
@@ -19,7 +21,7 @@ const Profile = () => {
           {/* Display other profile information here */}
         </>
       )}
-    </div>
+    </section>
   )
 }
 
