@@ -8,13 +8,13 @@ export default async function bookmarkPost(req, res) {
       await db.connect()
       const { postId, userId } = req.body
 
-      const post = await Post.findById({ _id: postId })
+      const post = await Post.findById(postId)
 
       if (!post) {
         return res.status(404).json({ success: false, error: 'Post not found' })
       }
 
-      const user = await User.findById({ _id: userId })
+      const user = await User.findById(userId)
       if (!user) {
         return res.status(404).json({ success: false, error: 'User not found' })
       }
@@ -22,20 +22,25 @@ export default async function bookmarkPost(req, res) {
       const isBookmarked = user?.bookmarks?.includes(postId)
 
       if (isBookmarked) {
-        user.bookmarks?.pull(postId)
+        user?.bookmarks?.pull(postId)
       } else {
-        user.bookmarks?.push(postId)
+        user?.bookmarks?.push(postId)
       }
 
       // Save the user's updated bookmarks
       await user.save()
       //  const updatedPost = await post.save()
 
+      const responseMessage = !isBookmarked
+        ? 'Bookmark removed'
+        : 'Post bookmarked'
+
       res.status(200).json({
         success: true,
         data: {
           post,
-          message: 'Post bookmarked successfully',
+          message: responseMessage,
+          isBookmarked: isBookmarked,
         },
       })
     } catch (error) {

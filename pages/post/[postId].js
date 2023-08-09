@@ -32,6 +32,7 @@ const PostDetails = () => {
         const response = await axios.get(`/api/post/postId?postId=${postId}`)
         // console.log(response.data)
         setPost(response.data)
+        setIsBookmarked(response.data.isBookmarked) // Set bookmark status from the API response
         setLoading(false)
       } catch (error) {
         console.error(error)
@@ -148,10 +149,10 @@ const PostDetails = () => {
         postId,
         userId: userProfile?._id,
       })
-      // console.log(response)
+      console.log(response)
       if (response.status === 200) {
-        setIsBookmarked((prev) => !prev)
-        toast.success(response.data.message, {
+        setIsBookmarked(response?.data?.isBookmarked)
+        toast.success(response?.data?.data?.message, {
           style: {
             backgroundColor: '#e0f5e6',
           },
@@ -247,7 +248,7 @@ const PostDetails = () => {
                     className='flex w-full items-center justify-between ml-2'
                     onSubmit={handleSubmitComment}>
                     <input
-                      className='w-[60%] px-1 outline-none'
+                      className='w-[60%] px-1 outline-none bg-transparent'
                       type='text'
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
