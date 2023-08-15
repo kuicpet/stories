@@ -27,12 +27,16 @@ const PostCard = ({
         </Link>
       </div>
       <div className='flex items-center justify-end'>
-        <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
+        {/**
+           * 
+           *  <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
           <LiaHeart className='h-4' />
           <p className='text-xs sm:text-base'>
             {likes} {likes === 1 ? 'Like' : 'Likes'}
           </p>
         </div>
+           */}
+
         <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
           <LiaCommentDotsSolid className='h-4' />
           <p className='text-xs sm:text-base'>

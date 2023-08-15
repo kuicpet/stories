@@ -195,7 +195,8 @@ const PostDetails = () => {
               <p>{moment(post.createdAt).fromNow()}</p>
             </div>
             <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-              <div
+              {/**
+                 *  <div
                 onClick={handleBookmarkPost}
                 className='flex items-center justify-center'>
                 {isBookmarked ? (
@@ -207,7 +208,10 @@ const PostDetails = () => {
                   {isBookmarked ? 'Bookmarked' : 'Bookmark Post'}
                 </p>
               </div>
-              <div
+                 */}
+
+              {/**
+                 * <div
                 onClick={handleLikePost}
                 className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
                 {post.likes?.length > 0 ? (
@@ -222,6 +226,8 @@ const PostDetails = () => {
                   </span>
                 </p>
               </div>
+                 */}
+
               <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
                 {post.comments?.length > 0 ? (
                   <LiaCommentDotsSolid className='h-4 text-[blue]' />
