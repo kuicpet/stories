@@ -107,6 +107,11 @@ const PostDetails = () => {
       const requestData = { postId, userId: userProfile._id }
       const response = await axios.post(endPoint, requestData)
       console.log(response.data)
+      toast.success(response?.data?.data?.message, {
+        style: {
+          backgroundColor: '#e0f5e6',
+        },
+      })
       setIsLiked(!isLiked)
     } catch (error) {
       console.log(error)
@@ -192,15 +197,17 @@ const PostDetails = () => {
               <div
                 onClick={handleLikePost}
                 className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
-                {post.likes?.length > 0 ? (
+                {isLiked ? (
                   <LiaHeartSolid className='h-4 text-[red]' />
                 ) : (
                   <LiaHeart className='h-4' />
                 )}
                 <p className='flex text-xs sm:text-base'>
-                  {post.likes?.length}
+                  {isLiked ? post.likes?.length + 1 : post.likes?.length}
                   <span className='hidden lg:flex md:flex mx-1'>
-                    {post.likes?.length === 1 ? 'Like' : 'Likes'}
+                    {post.likes?.length === 0 || post.likes?.length > 1
+                      ? 'Likes'
+                      : 'Like'}
                   </span>
                 </p>
               </div>
