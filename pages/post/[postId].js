@@ -100,34 +100,14 @@ const PostDetails = () => {
   const handleLikePost = async () => {
     try {
       if (!userProfile) {
-        // User is not authenticated, redirect to login page or show a message
-        toast.error('Please sign in to like the post')
+        toast.error('Please sign in to like this post')
         return
       }
-      if (isLiked) {
-        // User has already liked the post, so we need to unlike it
-        await axios
-          .post(`/api/post/unlike`, {
-            postId,
-            userId: userProfile._id,
-          })
-          .then((response) => {
-            console.log(response)
-          })
-        /* setLikes((prevLikes) =>
-          prevLikes.filter((like) => like !== userProfile._id)
-        )*/
-        setIsLiked(false)
-      } else {
-        // User hasn't liked the post yet, so we need to like it
-        await axios
-          .post(`/api/post/like`, { postId, userId: userProfile._id })
-          .then((response) => {
-            console.log(response)
-          })
-        // setLikes((prevLikes) => [...prevLikes, userProfile._id])
-        setIsLiked(true)
-      }
+      const endPoint = isLiked ? `/api/post/unlike` : `/api/post/like`
+      const requestData = { postId, userId: userProfile._id }
+      const response = await axios.post(endPoint, requestData)
+      console.log(response.data)
+      setIsLiked(!isLiked)
     } catch (error) {
       console.log(error)
       toast.error('Failed to like/unlike the post')
@@ -209,9 +189,7 @@ const PostDetails = () => {
                 </p>
               </div>
                  */}
-
-              {/**
-                 * <div
+              <div
                 onClick={handleLikePost}
                 className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
                 {post.likes?.length > 0 ? (
@@ -226,7 +204,6 @@ const PostDetails = () => {
                   </span>
                 </p>
               </div>
-                 */}
 
               <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>
                 {post.comments?.length > 0 ? (

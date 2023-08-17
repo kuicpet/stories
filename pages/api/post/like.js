@@ -38,7 +38,7 @@ export default async function toggleLikePost(req, res) {
       })
     } catch (error) {
       console.error(error)
-      res.status(500).json({ success: false, error: 'Failed to like on post' })
+      res.status(500).json({ success: false, error: 'Failed to like  post' })
     } finally {
       await db.disconnect()
     }
