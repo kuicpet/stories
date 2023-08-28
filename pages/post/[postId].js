@@ -79,6 +79,7 @@ const PostDetails = () => {
   }
 
   const handleDeleteComment = async (commentId) => {
+    console.log(commentId)
     try {
       setLoading(true)
       await axios
@@ -106,7 +107,7 @@ const PostDetails = () => {
       const endPoint = isLiked ? `/api/post/unlike` : `/api/post/like`
       const requestData = { postId, userId: userProfile._id }
       const response = await axios.post(endPoint, requestData)
-      console.log(response.data)
+      // console.log(response.data)
       toast.success(response?.data?.data?.message, {
         style: {
           backgroundColor: '#e0f5e6',

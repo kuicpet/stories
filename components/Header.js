@@ -6,6 +6,7 @@ import { LiaEdit } from 'react-icons/lia'
 import useAuthStore from '../store/authStore'
 import { AiOutlineUser } from 'react-icons/ai'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
+import { PiBookBookmarkBold } from 'react-icons/pi'
 
 const Header = () => {
   const router = useRouter()
@@ -20,12 +21,10 @@ const Header = () => {
     <header className='w-full flex justify-between items-center py-2 px-4  bg-[hsla(51,36%,83%,.5)]'>
       <Link href='/'>
         <div className='w-full md:w-[130px]'>
-          {/*<Image
-            className='cursor-pointer border-2 border-black'
-            src=''
-            alt='Logo'
-  />*/}
-          <p className='cursor-pointer border-2 border-black px-3'>Logo</p>
+          <p className='flex items-center justify-center cursor-pointer px-3'>
+            <PiBookBookmarkBold className='mx-1' />
+            Stories
+          </p>
         </div>
       </Link>
       <div className='relative flex items-center justify-evenly  lg:w-1/4 gap-5 md:gap-10'>
