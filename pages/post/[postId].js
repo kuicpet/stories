@@ -46,7 +46,7 @@ const PostDetails = () => {
   const handleSubmitComment = async (e) => {
     e.preventDefault()
     try {
-      setLoading(true)
+      // setLoading(true)
       await axios
         .post('/api/comment', {
           postId,
@@ -59,9 +59,9 @@ const PostDetails = () => {
             toast.success(response?.data?.data?.message)
             setPost(response?.data?.data?.post) // Update the post with the new comment
             setComment('') // Clear the comment input
-            setLoading(false)
+            //setLoading(false)
           } else {
-            setLoading(false)
+            //setLoading(false)
             toast.error(response?.data?.message)
             return
           }
@@ -79,14 +79,11 @@ const PostDetails = () => {
   }
 
   const handleDeleteComment = async (commentId) => {
-    console.log(commentId)
+    // console.log(commentId)
     try {
       setLoading(true)
       await axios
-        .delete(`/api/comment/delete`, {
-          postId,
-          commentId,
-        })
+        .delete(`/api/comment/delete?commentId=${commentId}`)
         .then((response) => {
           console.log(response)
         })
@@ -229,12 +226,12 @@ const PostDetails = () => {
             </div>
           </div>
           <div className='flex flex-col nw-full mt-2'>
-            <div className='flex flex-col lg:flex-row items-center justify-between border-b border-black  w-full px-2 py-1'>
+            <div className='flex flex-col lg:flex-row items-center justify-between border-b border-[gray]  w-full px-2 py-1'>
               <div className='lg:w-[20%] w-full my-1'>
                 <h3 className=''>Comments</h3>
               </div>
               {userProfile ? (
-                <div className='flex  lg:w-[80%] w-full border border-[blue] rounded-full'>
+                <div className='flex  lg:w-[80%] w-full border border-black rounded-full'>
                   <form
                     className='flex w-full items-center justify-between ml-2'
                     onSubmit={handleSubmitComment}>
@@ -245,8 +242,12 @@ const PostDetails = () => {
                       onChange={(e) => setComment(e.target.value)}
                       placeholder='Write your comment here...'
                     />
-                    <div className='flex items-center ml-auto justify-center bg-[blue] text-white px-3 py-1 rounded-full border-none outline-none'>
-                      <button>Add comment</button>
+                    <div className=''>
+                      <button
+                        disabled={!comment}
+                        className='flex items-center ml-auto justify-center bg-black text-white px-3 py-1 rounded-full border-none outline-none disabled:bg-[gray] '>
+                        Add comment
+                      </button>
                     </div>
                   </form>
                 </div>
