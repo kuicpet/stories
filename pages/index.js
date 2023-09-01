@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Loader, PostCard, Meta } from '../components'
+import bgImg from '../assets/bg.jpg'
 
 export default function Home() {
   const [posts, setPosts] = useState([])
