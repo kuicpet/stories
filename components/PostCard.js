@@ -13,11 +13,11 @@ const PostCard = ({
   comments,
 }) => {
   return (
-    <section className='flex flex-col m-2 shadow-md border border-black rounded-lg'>
+    <section className='flex flex-col m-2 shadow-md rounded-lg bg-[#f2efe6]'>
       <div className='flex w-full items-center justify-between p-2'>
         <div>
           <p className=''>{author}</p>
-          <p className='text-xs text-gray-600'>{moment(timestamp).fromNow()}</p>
+          <p className='text-xs text-gray-600'>{timestamp}</p>
         </div>
       </div>
       <div className='p-2 border-b border-black hover:text-[blue]'>

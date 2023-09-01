@@ -150,7 +150,7 @@ const PostDetails = () => {
   }
 
   return (
-    <section className='flex flex-col lg:w-3/4 w-full p-2 m-5'>
+    <section className='flex flex-col lg:w-3/4  p-2 m-5 bg-[#f2efe6] rounded-md w-[95%]'>
       <Meta title={post.title} />
       <Toaster />
       {loading ? (

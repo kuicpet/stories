@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Loader, PostCard, Meta } from '../components'
 import bgImg from '../assets/bg.jpg'
+import moment from 'moment/moment'
 
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -39,7 +40,7 @@ export default function Home() {
 
   // console.log(posts)
   return (
-    <div className='w-full m-5 flex items-center justify-center'>
+    <div className='w-[95%] m-5 flex items-center justify-center bg-[hsla(51,36%,83%,.5)]'>
       <Meta />
       <div className='lg:w-3/4 w-full m-5'>
         <div className='border-b-2 border-black outline-none mb-2'>
@@ -58,7 +59,7 @@ export default function Home() {
                       _id={post._id}
                       title={post.title}
                       content={shortenContent(post.content)}
-                      timestamp={post.createdAt}
+                      timestamp={moment(post.createdAt).fromNow()}
                       author={post.userId?.username}
                       likes={post.likes.length}
                       comments={post.comments.length}
