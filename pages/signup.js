@@ -96,7 +96,7 @@ const Signup = () => {
               type='email'
               value={email}
               required
-              pattern='/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/'
+              // pattern='/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/'
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Email'
               className='border border-black w-full p-1.5 bg-[#ededed] outline-none'

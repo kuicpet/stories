@@ -85,7 +85,7 @@ const CreatePost = () => {
           </div>
           <div className='my-7'>
             <button
-              disabled={!title || !content || !title.length < 3}
+              disabled={!title || !content }
               type='submit'
               className='w-full border border-black text-black p-2 disabled:cursor-not-allowed rounded-full font-semibold disabled:bg-[gray] bg-[#ace5d4] disabled:text-white'>
               Post Story
