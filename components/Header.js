@@ -17,6 +17,8 @@ const Header = () => {
     setShowDropDown(!showDropDown)
   }
 
+  const normalLink = 'hover:font-semibold'
+  const activeLink = 'font-semibold'
   return (
     <header className='w-full flex justify-between items-center py-2 px-4  bg-[hsla(51,36%,83%,.5)]'>
       <Link href='/'>
@@ -74,11 +76,11 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link href={`/login`}>Sign in</Link>
+            <Link className={router.pathname === '/login' ? activeLink : normalLink} href={`/login`}>Sign in</Link>
             <Link
-              className='flex items-center justify-center  border-2 border-black px-4 py-1 rounded-full font-semibold bg-black text-white'
+              className='flex items-center justify-center   px-4 py-1 rounded-full font-semibold bg-black text-[white] hover:bg-[rgba(0,0,0,0.85)]'
               href={`/signup`}>
-              Get started
+              Get Started
             </Link>
           </>
         )}
