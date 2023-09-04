@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import axios from 'axios'
+import { AiOutlineUser } from 'react-icons/ai'
+import FileBase from 'react-file-base64'
 import useAuthStore from '../store/authStore'
 import { Meta, Loader } from '../components'
 
@@ -13,9 +16,6 @@ const Profile = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const handleFile = (e) => {
-    setSelectedFile(e.target.files[0])
-  }
   const handleSubmit = () => {}
   useEffect(() => {
     if (!userProfile) {
@@ -39,17 +39,24 @@ const Profile = () => {
               <h1 className='text-xl font-semibold'>Edit Profile</h1>
             </div>
             <form className='m-3 p-2' onSubmit={handleSubmit}>
-              <div className='mb-2'>
-                <label>
-                  Profile Image <span className='text-[red]'>*</span>
+              <div className='mb-2 flex  flex-col'>
+                <div className='w-[150px] h-[150px] border border-black mb-2'>
+                  {selectedFile ? (
+                    <Image src={selectedFile} alt='' width={150} height={150} />
+                  ) : (
+                    <AiOutlineUser className='w-[150px] h-[150px]' />
+                  )}
+                </div>
+                <label className='flex flex-col'>
+                  <p>
+                    Profile Image <span className='text-[red]'>*</span>
+                  </p>
+                  <FileBase
+                    type='file'
+                    multiple={false}
+                    onDone={({ base64 }) => setSelectedFile(base64)}
+                  />
                 </label>
-                <input
-                  type='file'
-                  name='file'
-                  required
-                  onChange={handleFile}
-                  className='border border-black w-full p-1.5 bg-[#ededed] outline-none text-[gray]'
-                />
               </div>
               <div className='mb-2'>
                 <label>
