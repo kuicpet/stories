@@ -19,6 +19,7 @@ export default async function login(req, res) {
           _id: user._id,
           email: user.email,
           username: user.username,
+          profileImage: user.photo,
           message: 'User Login successful',
         })
       } else {

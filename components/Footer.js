@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className='flex items-center justify-end mt-5 mx-5 bottom-0'>
       <small className='p-3'>
-        &copy; Stories {date}
+        &copy; MuteDiary {date}
       </small>
     </footer>
   )

@@ -25,7 +25,7 @@ const Header = () => {
         <div className='w-full md:w-[130px]'>
           <p className='flex items-center justify-center cursor-pointer px-3'>
             <PiBookBookmarkBold className='mx-1' />
-            Stories
+            MuteDiary
           </p>
         </div>
       </Link>
@@ -39,8 +39,18 @@ const Header = () => {
 
             <div
               onClick={handleToggleDropDown}
-              className='p-1 rounded-full bg-[#e9e8e8] cursor-pointer hover:bg-[lightgray]'>
-              <AiOutlineUser className='w-full text-xl' />
+              className='p-1  cursor-pointer hover:bg-[lightgray]'>
+              {userProfile.photo ? (
+                <Image
+                  className='rounded-full'
+                  src={userProfile?.photo}
+                  alt=''
+                  width={30}
+                  height={30}
+                />
+              ) : (
+                <AiOutlineUser className='w-full text-xl' />
+              )}
             </div>
             {showDropDown && (
               <div className='absolute z-30 top-10 right-0 bg-white w-[200px]  p-2 rounded-lg shadow-lg'>
@@ -76,7 +86,11 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link className={router.pathname === '/login' ? activeLink : normalLink} href={`/login`}>Sign in</Link>
+            <Link
+              className={router.pathname === '/login' ? activeLink : normalLink}
+              href={`/login`}>
+              Sign in
+            </Link>
             <Link
               className='flex items-center justify-center   px-4 py-1 rounded-full font-semibold bg-black text-[white] hover:bg-[rgba(0,0,0,0.85)]'
               href={`/signup`}>

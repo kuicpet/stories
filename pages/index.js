@@ -40,7 +40,7 @@ export default function Home() {
 
   // console.log(posts)
   return (
-    <div className='w-[95%] m-5 flex items-center justify-center bg-[hsla(51,36%,83%,.5)]'>
+    <div className='w-[95%] m-5 flex items-center justify-center bg-transparent'>
       <Meta />
       <div className='lg:w-3/4 w-full m-5'>
         <div className='border-b-2 border-black outline-none mb-2'>

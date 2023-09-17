@@ -21,6 +21,7 @@ const Login = () => {
       await axios
         .post(`/api/user/login`, { username, password })
         .then((response) => {
+          console.log(response.data)
           if (response.status === 200) {
             toast.success(response?.data?.message, {
               style: {

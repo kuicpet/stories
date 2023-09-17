@@ -10,13 +10,58 @@ import { Meta, Loader } from '../components'
 
 const Profile = () => {
   const router = useRouter()
-  const { userProfile } = useAuthStore()
+  const { userProfile, registerUser } = useAuthStore()
   const [loading, setLoading] = useState(false)
   const [selectedFile, setSelectedFile] = useState()
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const handleSubmit = () => {}
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (password !== confirmPassword) {
+      toast.error('Passwords donot match')
+      return
+    }
+    try {
+      setLoading(true)
+      await axios
+        .put(`/api/user/updateProfile`, {
+          username: userProfile.username,
+          email: userProfile.email,
+          password,
+          photo: selectedFile,
+        })
+        .then((response) => {
+          if (response.status === 201) {
+            console.log(response)
+            toast.success(response?.data?.message, {
+              style: {
+                backgroundColor: '#e0f5e6',
+              },
+            })
+            // save user
+            registerUser(response?.data)
+            // redirect user
+            // router.push(`/login`)
+          } else {
+            setLoading(false)
+            toast.error(response?.data?.message, {
+              style: {
+                color: 'red',
+                backgroundColor: '#ffebee',
+              },
+            })
+            return
+          }
+        })
+    } catch (error) {
+      console.log(error)
+      toast.error(error?.response?.data?.message)
+    } finally {
+      setLoading(false)
+    }
+    // console.log(userProfile.username, userProfile.email, password, confirmPassword, selectedFile)
+  }
   useEffect(() => {
     if (!userProfile) {
       router.push(`/login`)
@@ -42,7 +87,12 @@ const Profile = () => {
               <div className='mb-2 flex  flex-col'>
                 <div className='w-[150px] h-[150px] border border-black mb-2'>
                   {selectedFile ? (
-                    <Image src={selectedFile} alt='' width={150} height={150} />
+                    <Image
+                      src={selectedFile ? selectedFile : userProfile.photo}
+                      alt=''
+                      width={150}
+                      height={150}
+                    />
                   ) : (
                     <AiOutlineUser className='w-[150px] h-[150px]' />
                   )}
