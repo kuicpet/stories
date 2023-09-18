@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 const Meta = ({ title, description, keywords }) => {
   return (
     <Helmet>
-      <title>Stories | {title}</title>
+      <title>MuteDiary | {title}</title>
       <meta name='description' content={description} />
       <meta name='keywords' content={keywords} />
       <link rel='icon' href='/favicon.ico' />

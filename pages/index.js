@@ -44,7 +44,7 @@ export default function Home() {
       <Meta />
       <div className='lg:w-3/4 w-full m-5'>
         <div className='border-b-2 border-black outline-none mb-2'>
-          <h1 className='text-2xl p-2'>Stories</h1>
+          <h1 className='text-2xl p-2'>... tell your story</h1>
         </div>
         {loading ? (
           <div className='fixed top-0 right-0 bottom-0 left-0 z-50 flex justify-center items-center bg-[rgba(0,0,0,0.5)]'>
