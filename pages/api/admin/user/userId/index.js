@@ -1,20 +1,20 @@
-import User from '../../../../models/User'
-import db from '../../../../utils/db'
-import { isAdmin, isAuth } from '../../../../utils/auth'
+import User from '../../../../../models/User'
+import db from '../../../../../utils/db'
+import { isAdmin, isAuth } from '../../../../../utils/auth'
 import mongoose from 'mongoose'
 
 const getUser = async (req, res) => {
   if (req.method === 'GET') {
     try {
       await db.connect()
-      
+
       // Check if the user is an admin
       if (!isAuth(req) || !isAdmin(req)) {
         return res.status(403).json({ success: false, error: 'Forbidden' })
       }
-      
+
       const { userId } = req.query
-      
+
       const user = await User.findById(userId)
 
       if (!user) {

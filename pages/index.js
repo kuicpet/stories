@@ -2,14 +2,19 @@ import Head from 'next/head'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Loader, PostCard, Meta } from '../components'
+import { Loader, PostCard, Meta, Button } from '../components'
 import bgImg from '../assets/bg.jpg'
 import moment from 'moment/moment'
 
+const pageSize = 3
 export default function Home() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(false)
+  const [page, setPage] = useState(1)
+  const steps = page * pageSize - pageSize
+
   const MAX_CONTENT_LENGTH = 20
+
   useEffect(() => {
     fetchPosts()
   }, [])
@@ -53,7 +58,7 @@ export default function Home() {
         ) : (
           <div className=' w-full flex flex-col'>
             {posts && posts.length > 0
-              ? posts.map((post) => (
+              ? posts?.slice(steps, steps + pageSize).map((post) => (
                   <div key={post._id}>
                     <PostCard
                       _id={post._id}
@@ -67,6 +72,24 @@ export default function Home() {
                   </div>
                 ))
               : 'No Posts'}
+          </div>
+        )}
+        {posts && posts.length > 0 && (
+          <div className='my-3 flex justify-between p-2'>
+            <button
+              className='border bg-[#ace5d4] border-black font-semibold py-1 w-1/4 rounded-full cursor-pointer
+            hover:bg-black hover:text-white disabled:bg-[gray] disabled:cursor-not-allowed outline-none disabled:text-white'
+              disabled={page <= 1}
+              onClick={() => setPage((prev) => prev - 1)}>
+              Prev
+            </button>
+            <button
+              className='border bg-[#ace5d4] border-black font-semibold py-1 w-1/4 rounded-full cursor-pointer
+            hover:bg-black hover:text-white disabled:bg-[gray] disabled:cursor-not-allowed outline-none disabled:text-white'
+              disabled={page >= posts.length / pageSize}
+              onClick={() => setPage((prev) => prev + 1)}>
+              Next
+            </button>
           </div>
         )}
       </div>
