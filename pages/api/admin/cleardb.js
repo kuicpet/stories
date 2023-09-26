@@ -7,7 +7,7 @@ export default async function clear(req, res) {
     try {
       await db.connect()
       await User.deleteMany()
-      await Post.deleteMany()
+      // await Post.deleteMany()
       await db.disconnect()
       res.status(200).json({ message: 'Collection cleared successfully' })
     } catch (error) {
