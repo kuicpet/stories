@@ -2,7 +2,7 @@ import Head from 'next/head'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Loader, PostCard, Meta, Button } from '../components'
+import { Loader, PostCard, Meta, Hero } from '../components'
 import bgImg from '../assets/bg.jpg'
 import moment from 'moment/moment'
 
@@ -45,9 +45,10 @@ export default function Home() {
 
   // console.log(posts)
   return (
-    <div className='w-[95%] m-5 flex items-center justify-center bg-transparent'>
+    <div className='w-[95%] m-5 flex flex-col items-center justify-center bg-transparent'>
       <Meta />
       <div className='lg:w-3/4 w-full m-5'>
+        <Hero />
         <div className='border-b-2 border-black outline-none mb-2'>
           <h1 className='text-2xl p-2'>... tell your story</h1>
         </div>
@@ -57,6 +58,7 @@ export default function Home() {
           </div>
         ) : (
           <div className=' w-full flex flex-col'>
+            <p>Recent stories...</p>
             {posts && posts.length > 0
               ? posts?.slice(steps, steps + pageSize).map((post) => (
                   <div key={post._id}>

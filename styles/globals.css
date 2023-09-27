@@ -22,3 +22,10 @@ a {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.hero {
+  background: url('../assets/bg1.jpg') no-repeat center/cover;
+}
