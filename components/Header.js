@@ -7,6 +7,7 @@ import useAuthStore from '../store/authStore'
 import { AiOutlineUser } from 'react-icons/ai'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
 import { PiBookBookmarkBold } from 'react-icons/pi'
+import { ImStatsBars } from 'react-icons/im'
 
 const Header = () => {
   const router = useRouter()
@@ -20,7 +21,7 @@ const Header = () => {
   const normalLink = 'hover:font-semibold'
   const activeLink = 'font-semibold'
   return (
-    <header className='w-full flex justify-between items-center py-2 px-4  bg-[hsla(51,36%,83%,.5)]'>
+    <header className='w-full flex justify-between items-center py-2 px-4  bg-[hsla(51,36%,83%,.5)] '>
       <Link href='/'>
         <div className='w-full md:w-[130px]'>
           <p className='flex items-center justify-center cursor-pointer px-3'>
@@ -60,18 +61,26 @@ const Header = () => {
                       Hi, {userProfile?.username}
                     </p>
                   </li>
-                  <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
-                    <Link href={`/profile`}>Profile</Link>
+                  <li className='flex items-center justify-start  px-3 py-1 hover:font-semibold cursor-pointer'>
+                    <Link
+                      className='flex items-center w-full'
+                      href={`/profile`}>
+                      <AiOutlineUser className='mr-2' /> Profile
+                    </Link>
                   </li>
-                  <li className='flex items-center justify-start  px-4 py-1 hover:font-semibold cursor-pointer'>
-                    <Link href={`/create`}>Write Story</Link>
+                  <li className='flex items-center justify-start  px-3 py-1 hover:font-semibold cursor-pointer'>
+                    <Link className='flex items-center w-full' href={`/create`}>
+                      <LiaEdit className='mr-2' />
+                      Write Story
+                    </Link>
                   </li>
-                  <li className='flex items-center justify-start  px-4 py-1 rounded-full hover:font-semibold cursor-pointer'>
+                  <li className='flex items-center justify-start  px-3 py-1 rounded-full hover:font-semibold cursor-pointer'>
+                    <ImStatsBars className='mr-2' />
                     <Link href={`/dashboard`}>Dashboard</Link>
                   </li>
                   <li>
                     <button
-                      className='flex  text-[red] items-center justify-start  px-4 py-1 rounded-full hover:font-semibold'
+                      className='flex  text-[red] items-center justify-start  px-3 py-1 rounded-full hover:font-semibold'
                       onClick={() => {
                         logoutUser()
                         router.push('/')

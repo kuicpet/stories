@@ -8,7 +8,7 @@ const Hero = () => {
         <h1 className='md:text-right font-semibold md:text-xl text-lg'>
           MuteDiary is a community where personal stories and experiences can be
           anonymously shared, especially when it hurts and no one believes you.
-          Let it out,keep a positive vibe,rise through those experiences.
+          Let it out,keep a positive vibe,rise through those experiences...
         </h1>
       </div>
     </section>
