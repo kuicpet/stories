@@ -18,12 +18,12 @@ const UserDashboard = () => {
           </div>
         </div>
         <div className='flex border md:w-3/4 w-full  '>
-          <div className='p-4 m-1 rounded-md w-full bg-black opacity-80'>
-            <h3 className='font-semibold text-3xl text-white'>{userProfile?.username}</h3>
+          <div className='p-4 m-1 rounded-md w-full bg-white opacity-80'>
+            <h3 className='font-semibold text-3xl text-black'>{userProfile?.username}</h3>
             <h3 className='font-semibold text-xl text-[gray]'>
               {userProfile?.email}
             </h3>
-            <div className='flex items-center  my-3 text-white'>
+            <div className='flex items-center  my-3 text-black'>
               <BiCalendar className='mr-1' />
               <h4 className=''>
                 Joined {formatTimestamp(userProfile.registeredAt)}

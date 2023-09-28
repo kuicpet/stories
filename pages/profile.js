@@ -85,7 +85,7 @@ const Profile = () => {
             </div>
             <form className='m-3 p-2' onSubmit={handleSubmit}>
               <div className='mb-2 flex  flex-col'>
-                <div className='w-[150px] h-[150px] border border-black mb-2'>
+                <div className='w-[150px] h-[150px] border border-black mb-2 rounded-md'>
                   {selectedFile ? (
                     <Image
                       src={selectedFile ? selectedFile : userProfile.photo}
