@@ -20,6 +20,7 @@ export default async function login(req, res) {
           email: user.email,
           username: user.username,
           profileImage: user.photo,
+          registeredAt: user.createdAt,
           message: 'User Login successful',
         })
       } else {
