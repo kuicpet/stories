@@ -81,7 +81,7 @@ const Profile = () => {
           )}
           <div className='lg:w-[90%] w-full'>
             <div className='flex items-center justify-center'>
-              <h1 className='text-xl font-semibold'>Edit Profile</h1>
+              <h1 className='text-xl font-semibold'>Update your Profile</h1>
             </div>
             <form className='m-3 p-2' onSubmit={handleSubmit}>
               <div className='mb-2 flex  flex-col'>

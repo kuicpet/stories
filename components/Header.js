@@ -53,7 +53,7 @@ const Header = () => {
 
             <div
               onClick={handleToggleDropDown}
-              className='p-1  cursor-pointer hover:bg-[lightgray]'>
+              className='p-1  cursor-pointer hover:bg-[lightgray] rounded-md'>
               {userProfile.photo ? (
                 <Image
                   className='rounded-full'
