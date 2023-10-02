@@ -73,23 +73,37 @@ const UserDashboard = () => {
             <AiOutlineUser className='w-[150px] h-[150px]' />
           </div>
         </div>
-        <div className='flex md:w-3/4  flex-col'>
-          <div className='p-4 m-1 rounded-md w-full bg-white opacity-80'>
-            <h3 className='font-semibold text-3xl text-black'>
-              {userProfile?.username}
-            </h3>
-            <h3 className='font-semibold text-xl text-[gray]'>
-              {userProfile?.email}
-            </h3>
-            <div className='flex items-center  my-1 text-black'>
-              <BiCalendar className='mr-1' />
-              <h4 className=''>
-                Joined {formatTimestamp(userProfile.registeredAt)}
-              </h4>
+        <div className='flex md:w-3/4 w-full  flex-col'>
+          <div className='flex md:flex-row flex-col p-4 m-1 rounded-md w-full bg-white opacity-80'>
+            <div className='flex flex-col  md:w-1/2 w-full'>
+              <h3 className='font-semibold text-3xl text-black'>
+                {userProfile?.username}
+              </h3>
+              <h3 className='font-semibold text-xl text-[gray]'>
+                {userProfile?.email}
+              </h3>
+              <div className='flex items-center  my-1 text-black'>
+                <BiCalendar className='mr-1' />
+                <h4 className=''>
+                  Joined {formatTimestamp(userProfile.registeredAt)}
+                </h4>
+              </div>
+              <div className='flex'>
+                <Link
+                  href={`/profile`}
+                  className='hover:bg-black hover:text-white border-2 border-black px-4 rounded-full'>
+                  Update Profile
+                </Link>
+              </div>
             </div>
-            <div className='flex'>
-              <Link href={`/profile`} className='hover:bg-black hover:text-white border-2 border-black px-4 rounded-full'>Update Profile</Link>
+            {/**
+             * 
+             * 
+            <div className='flex flex-col items-start  md:w-1/2 my-2 border-2 border-black p-2 rounded-md'>
+              <p>Your Total Stories: {posts?.length}</p>
+              <p>Your Total Comments: {posts?.length}</p>
             </div>
+             */}
           </div>
         </div>
       </div>
