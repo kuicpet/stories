@@ -1,13 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { AiOutlineUser } from 'react-icons/ai'
 import { BiCalendar } from 'react-icons/bi'
-import { Meta } from '../components'
+import axios from 'axios'
+import { Meta, Loader, PostCard } from '../components'
 import useAuthStore from '../store/authStore'
 import { formatTimestamp } from '../utils/formatTimestamp'
+import moment from 'moment/moment'
 
 const UserDashboard = () => {
   const { userProfile } = useAuthStore()
+  const userId = userProfile._id
+  const [loading, setLoading] = useState(false)
+  const [posts, setPosts] = useState([])
+
+    const MAX_CONTENT_LENGTH = 20
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        setLoading(true)
+        await axios
+          .get(`/api/user/profile?userId=${userId}`)
+          .then((response) => {
+            if (response.status === 200) {
+              setLoading(false)
+              console.log(response?.data?.data?.posts)
+              setPosts(response?.data?.data?.posts)
+            }
+          })
+        // console.log(response.data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchUserProfile()
+  }, [userId])
+
+  const fetchUserProfile = async () => {
+    try {
+      setLoading(true)
+      await axios.get(`/api/user/profile?userId=${userId}`).then((response) => {
+        if (response.status === 200) {
+          setLoading(false)
+          setPosts(response.data)
+        }
+      })
+      // console.log(response.data)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+   const shortenContent = (content) => {
+     if (content.split(' ').length > MAX_CONTENT_LENGTH) {
+       return content.split(' ').slice(0, MAX_CONTENT_LENGTH).join(' ') + '...'
+     }
+     return content
+   }
+
   return (
     <section className='flex flex-col md:w-3/4 w-[95%] border'>
       <Meta title='Dashboard' />
@@ -17,9 +73,11 @@ const UserDashboard = () => {
             <AiOutlineUser className='w-[150px] h-[150px]' />
           </div>
         </div>
-        <div className='flex border md:w-3/4 w-full  '>
+        <div className='flex md:w-3/4 w-full    '>
           <div className='p-4 m-1 rounded-md w-full bg-white opacity-80'>
-            <h3 className='font-semibold text-3xl text-black'>{userProfile?.username}</h3>
+            <h3 className='font-semibold text-3xl text-black'>
+              {userProfile?.username}
+            </h3>
             <h3 className='font-semibold text-xl text-[gray]'>
               {userProfile?.email}
             </h3>
@@ -33,7 +91,29 @@ const UserDashboard = () => {
         </div>
       </div>
       <div className='my-5 border-2 border-black rounded-md p-2'>
-        User Posts
+        {loading ? (
+          <div className='fixed top-0 right-0 bottom-0 left-0 z-50 flex justify-center items-center bg-[rgba(0,0,0,0.5)]'>
+            <Loader />
+          </div>
+        ) : (
+          <div className=' w-full flex flex-col'>
+            {posts && posts.length > 0
+              ? posts?.map((post) => (
+                  <div key={post._id}>
+                    <PostCard
+                      _id={post._id}
+                      title={post.title}
+                      content={shortenContent(post.content)}
+                      // timestamp={moment(post.createdAt).fromNow()}
+                      author={post.userId?.username}
+                      likes={post.likes.length}
+                      comments={post.comments.length}
+                    />
+                  </div>
+                ))
+              : 'No Posts Found'}
+          </div>
+        )}
       </div>
     </section>
   )
