@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { AiOutlineUser } from 'react-icons/ai'
 import { BiCalendar } from 'react-icons/bi'
 import axios from 'axios'
 import { Meta, Loader, PostCard } from '../components'
 import useAuthStore from '../store/authStore'
 import { formatTimestamp } from '../utils/formatTimestamp'
-import moment from 'moment/moment'
 
 const UserDashboard = () => {
   const { userProfile } = useAuthStore()
@@ -14,7 +14,7 @@ const UserDashboard = () => {
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
 
-    const MAX_CONTENT_LENGTH = 20
+  const MAX_CONTENT_LENGTH = 20
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -57,12 +57,12 @@ const UserDashboard = () => {
     }
   }
 
-   const shortenContent = (content) => {
-     if (content.split(' ').length > MAX_CONTENT_LENGTH) {
-       return content.split(' ').slice(0, MAX_CONTENT_LENGTH).join(' ') + '...'
-     }
-     return content
-   }
+  const shortenContent = (content) => {
+    if (content.split(' ').length > MAX_CONTENT_LENGTH) {
+      return content.split(' ').slice(0, MAX_CONTENT_LENGTH).join(' ') + '...'
+    }
+    return content
+  }
 
   return (
     <section className='flex flex-col md:w-3/4 w-[95%] border'>
@@ -73,7 +73,7 @@ const UserDashboard = () => {
             <AiOutlineUser className='w-[150px] h-[150px]' />
           </div>
         </div>
-        <div className='flex md:w-3/4 w-full    '>
+        <div className='flex md:w-3/4  flex-col'>
           <div className='p-4 m-1 rounded-md w-full bg-white opacity-80'>
             <h3 className='font-semibold text-3xl text-black'>
               {userProfile?.username}
@@ -81,11 +81,14 @@ const UserDashboard = () => {
             <h3 className='font-semibold text-xl text-[gray]'>
               {userProfile?.email}
             </h3>
-            <div className='flex items-center  my-3 text-black'>
+            <div className='flex items-center  my-1 text-black'>
               <BiCalendar className='mr-1' />
               <h4 className=''>
                 Joined {formatTimestamp(userProfile.registeredAt)}
               </h4>
+            </div>
+            <div className='flex'>
+              <Link href={`/profile`} className='hover:bg-black hover:text-white border-2 border-black px-4 rounded-full'>Update Profile</Link>
             </div>
           </div>
         </div>
@@ -97,6 +100,7 @@ const UserDashboard = () => {
           </div>
         ) : (
           <div className=' w-full flex flex-col'>
+            <p>My stories...</p>
             {posts && posts.length > 0
               ? posts?.map((post) => (
                   <div key={post._id}>
@@ -104,7 +108,7 @@ const UserDashboard = () => {
                       _id={post._id}
                       title={post.title}
                       content={shortenContent(post.content)}
-                      // timestamp={moment(post.createdAt).fromNow()}
+                      timestamp={formatTimestamp(post.createdAt)}
                       author={post.userId?.username}
                       likes={post.likes.length}
                       comments={post.comments.length}
