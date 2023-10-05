@@ -161,7 +161,7 @@ const PostDetails = () => {
         <>
           <div className='my-4 flex items-center'>
             <Link
-              className='flex items-center  font-semibold text-[blue] hover:underline'
+              className='flex items-center justify-center px-3 rounded-full font-semibold  hover:bg-[#ace5d4] border-2 border-black transition-all ease-in-out'
               href={`/`}>
               Back to Stories
             </Link>
@@ -174,7 +174,9 @@ const PostDetails = () => {
           </div>
           <div className='flex w-full border-b border-black items-center justify-between'>
             <div className='flex px-4'>
-              <p className='mr-5 font-semibold'>{post?.userId?.username}</p>
+              <p className='mr-5 font-semibold capitalize'>
+                {post?.userId?.username && `By ${post?.userId?.username}`}
+              </p>
               <p>{moment(post.createdAt).fromNow()}</p>
             </div>
             <div className='flex items-center space-x-1 flex-grow-0 justify-center rounded-xl p-2 cursor-pointer'>

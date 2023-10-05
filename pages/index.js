@@ -79,14 +79,14 @@ export default function Home() {
         {posts && posts.length > 0 && (
           <div className='my-3 flex justify-between p-2'>
             <button
-              className='border bg-[#ace5d4] border-black font-semibold py-1 w-1/4 rounded-full cursor-pointer
+              className='border-2 bg-[#ace5d4] border-black font-semibold py-1 w-1/4 rounded-full cursor-pointer
             hover:bg-black hover:text-white disabled:bg-[gray] disabled:cursor-not-allowed outline-none disabled:text-white'
               disabled={page <= 1}
               onClick={() => setPage((prev) => prev - 1)}>
               Prev
             </button>
             <button
-              className='border bg-[#ace5d4] border-black font-semibold py-1 w-1/4 rounded-full cursor-pointer
+              className='border-2 bg-[#ace5d4] border-black  font-semibold py-1 w-1/4 rounded-full cursor-pointer
             hover:bg-black hover:text-white disabled:bg-[gray] disabled:cursor-not-allowed outline-none disabled:text-white'
               disabled={page >= posts.length / pageSize}
               onClick={() => setPage((prev) => prev + 1)}>

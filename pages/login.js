@@ -94,7 +94,7 @@ const Login = () => {
             <button
               disabled={!username || !password || password.length <= 5}
               type='submit'
-              className='w-full outline-none border border-black p-2 disabled:bg-[gray] font-semibold disabled:cursor-not-allowed rounded-full bg-[#ace5d4] text-black disabled:text-white'>
+              className='w-full outline-none border-2 border-black p-2 disabled:bg-[gray] font-semibold disabled:cursor-not-allowed rounded-full bg-[#ace5d4] text-black disabled:text-white'>
               Login
             </button>
           </div>

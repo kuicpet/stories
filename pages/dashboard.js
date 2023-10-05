@@ -91,7 +91,7 @@ const UserDashboard = () => {
               <div className='flex'>
                 <Link
                   href={`/profile`}
-                  className='hover:bg-black hover:text-white border-2 border-black px-4 rounded-full'>
+                  className='hover:bg-black hover:text-white border-2 border-black px-4 rounded-full bg-[#ace5d4]'>
                   Update Profile
                 </Link>
               </div>

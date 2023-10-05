@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment/moment'
 import Link from 'next/link'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
+import { AiOutlineUser } from 'react-icons/ai'
 
 const PostCard = ({
   _id,
@@ -16,7 +17,11 @@ const PostCard = ({
     <section className='flex flex-col m-2 shadow-md rounded-lg bg-[#f2efe6]'>
       <div className='flex w-full items-center justify-between p-2'>
         <div>
-          <p className=''>{author}</p>
+          <div className='flex items-center justify-center text-xl'>
+            {author && <AiOutlineUser className='mr-2' />}
+
+            <p className='capitalize'>{author && `By ${author}`}</p>
+          </div>
           <p className='text-xs text-gray-600'>{timestamp}</p>
         </div>
       </div>
