@@ -10,7 +10,7 @@ import { formatTimestamp } from '../utils/formatTimestamp'
 
 const UserDashboard = () => {
   const { userProfile } = useAuthStore()
-  const userId = userProfile._id
+  const userId = userProfile?._id
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
 
@@ -25,11 +25,10 @@ const UserDashboard = () => {
           .then((response) => {
             if (response.status === 200) {
               setLoading(false)
-              console.log(response?.data?.data?.posts)
+              // console.log(response?.data?.data?.posts)
               setPosts(response?.data?.data?.posts)
             }
           })
-        // console.log(response.data)
       } catch (error) {
         console.error(error)
       } finally {
@@ -85,7 +84,7 @@ const UserDashboard = () => {
               <div className='flex items-center  my-1 text-black'>
                 <BiCalendar className='mr-1' />
                 <h4 className=''>
-                  Joined {formatTimestamp(userProfile.registeredAt)}
+                  Joined {formatTimestamp(userProfile?.registeredAt)}
                 </h4>
               </div>
               <div className='flex'>
@@ -115,17 +114,17 @@ const UserDashboard = () => {
         ) : (
           <div className=' w-full flex flex-col'>
             <p>My stories...</p>
-            {posts && posts.length > 0
+            {posts && posts?.length > 0
               ? posts?.map((post) => (
                   <div key={post._id}>
                     <PostCard
-                      _id={post._id}
-                      title={post.title}
-                      content={shortenContent(post.content)}
-                      timestamp={formatTimestamp(post.createdAt)}
+                      _id={post?._id}
+                      title={post?.title}
+                      content={shortenContent(post?.content)}
+                      timestamp={formatTimestamp(post?.createdAt)}
                       author={post.userId?.username}
-                      likes={post.likes.length}
-                      comments={post.comments.length}
+                      likes={post?.likes?.length}
+                      comments={post?.comments?.length}
                     />
                   </div>
                 ))

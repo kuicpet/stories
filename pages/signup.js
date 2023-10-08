@@ -15,7 +15,30 @@ const Signup = () => {
   const [username, setUsername] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [emailToken, setEmailToken] = useState(null)
 
+  const sendEmailConfirmation = async () => {
+    try {
+      await axios.get(`/api/generateToken`).then((response) => {
+        if (response.status === 200) {
+          console.log(response)
+          const { token } = response?.data
+          console.log(token)
+          // Create the email message
+          const msg = {
+            to: email, // User's email address
+            from: 'noreply@mutediary.com', // Your sender email address
+            subject: 'Confirm Your Email',
+            html: `<p>Click the following link to confirm your email:</p>
+                    <a href="https://mutediary.com/confirm?token=${token}">Confirm Email</a>
+            `,
+          }
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
@@ -32,15 +55,19 @@ const Signup = () => {
         })
         .then((response) => {
           if (response.status === 201) {
-            toast.success(response?.data?.message, {
-              style: {
-                backgroundColor: '#e0f5e6',
+            toast.success(
+              response?.data?.message,
+              {
+                style: {
+                  backgroundColor: '#e0f5e6',
+                },
               },
-            })
+              sendEmailConfirmation()
+            )
             // save user
-            registerUser(response?.data)
+            // registerUser(response?.data)
             // redirect user
-            router.push(`/login`)
+            // router.push(`/login`)
           } else {
             setLoading(false)
             toast.error(response?.data?.message, {
