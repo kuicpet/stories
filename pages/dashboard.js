@@ -65,7 +65,7 @@ const UserDashboard = () => {
 
   return (
     <section className='flex flex-col md:w-3/4 w-[95%] border'>
-      <Meta title='Dashboard' />
+      <Meta title={`Dashboard - ${userProfile?.username}`} />
       <div className='flex md:flex-row flex-col  w-full border-2 p-2 md:h-[12rem] border-black rounded-md dash'>
         <div className='flex  items-center justify-center md:w-1/4 h-full mr-auto'>
           <div className='p-1 m-1 rounded-md bg-white opacity-80'>

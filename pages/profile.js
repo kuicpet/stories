@@ -70,7 +70,7 @@ const Profile = () => {
 
   return (
     <section className='flex items-center justify-center border border-black lg:w-1/2 w-[90%] m-5 p-2 rounded-md bg-[#f2efe6]'>
-      <Meta title='Profile' />
+      <Meta title={`Profile - ${userProfile?.username}`} />
       {userProfile && (
         <>
           <Toaster />
