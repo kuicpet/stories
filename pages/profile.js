@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import axios from 'axios'
 import { AiOutlineUser } from 'react-icons/ai'
+import { HiOutlineUser } from 'react-icons/hi2'
 import FileBase from 'react-file-base64'
 import useAuthStore from '../store/authStore'
 import { Meta, Loader } from '../components'
@@ -94,7 +95,7 @@ const Profile = () => {
                       height={150}
                     />
                   ) : (
-                    <AiOutlineUser className='w-[150px] h-[150px]' />
+                    <HiOutlineUser className='w-[150px] h-[150px]' />
                   )}
                 </div>
                 <label className='flex flex-col'>

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { LiaEdit } from 'react-icons/lia'
 import useAuthStore from '../store/authStore'
-import { AiOutlineUser } from 'react-icons/ai'
+import { HiOutlineUser } from 'react-icons/hi2'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
 import { PiBookBookmarkBold } from 'react-icons/pi'
 import { ImStatsBars } from 'react-icons/im'
@@ -28,7 +28,6 @@ const Header = () => {
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-
   }, [router])
 
   const normalLink = 'hover:font-semibold'
@@ -63,7 +62,7 @@ const Header = () => {
                   height={30}
                 />
               ) : (
-                <AiOutlineUser className='w-full text-xl' />
+                <HiOutlineUser className='w-full text-xl' />
               )}
             </div>
             {showDropDown && (
@@ -78,7 +77,7 @@ const Header = () => {
                     <Link
                       className='flex items-center w-full'
                       href={`/profile`}>
-                      <AiOutlineUser className='mr-2' /> Profile
+                      <HiOutlineUser className='mr-2' /> Profile
                     </Link>
                   </li>
                   <li className='flex items-center justify-start  px-3 py-1 hover:font-semibold cursor-pointer'>

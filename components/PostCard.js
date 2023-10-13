@@ -3,6 +3,7 @@ import moment from 'moment/moment'
 import Link from 'next/link'
 import { LiaCommentDotsSolid, LiaHeart, LiaHeartSolid } from 'react-icons/lia'
 import { AiOutlineUser } from 'react-icons/ai'
+import { HiOutlineUser } from 'react-icons/hi2'
 
 const PostCard = ({
   _id,
@@ -18,7 +19,7 @@ const PostCard = ({
       <div className='flex w-full items-center justify-between p-2'>
         <div>
           <div className='flex items-center justify-center text-xl'>
-            {author && <AiOutlineUser className='mr-2' />}
+            {author && <HiOutlineUser className='mr-2' />}
 
             <p className='capitalize'>{author && `By ${author}`}</p>
           </div>
