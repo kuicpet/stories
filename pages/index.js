@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <div className='w-[95%] m-5 flex flex-col items-center justify-center bg-transparent'>
       <Meta />
-      <div className='lg:w-3/4 w-full m-5'>
+      <div className='lg:w-[90%]  w-full m-5'>
         <Hero />
         <div className='border-b-2 border-black outline-none mb-2'>
           <h1 className='text-2xl p-2'>... tell your story</h1>
