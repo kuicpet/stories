@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <div className='w-[95%] m-5 flex flex-col items-center justify-center bg-transparent'>
       <Meta />
-      <div className='lg:w-3/4 w-full m-5'>
+      <div className='lg:w-[90%]  w-full m-5'>
         <Hero />
         <div className='border-b-2 border-black outline-none mb-2'>
           <h1 className='text-2xl p-2'>... tell your story</h1>
@@ -58,7 +58,7 @@ export default function Home() {
           </div>
         ) : (
           <div className=' w-full flex flex-col'>
-            <p>Recent stories...</p>
+            <p className='m-3 font-semibold'>Recent stories...</p>
             {posts && posts.length > 0
               ? posts?.slice(steps, steps + pageSize).map((post) => (
                   <div key={post._id}>
