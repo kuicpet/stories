@@ -58,7 +58,7 @@ export default function Home() {
           </div>
         ) : (
           <div className=' w-full flex flex-col'>
-            <p>Recent stories...</p>
+            <p className='m-3 font-semibold'>Recent stories...</p>
             {posts && posts.length > 0
               ? posts?.slice(steps, steps + pageSize).map((post) => (
                   <div key={post._id}>
